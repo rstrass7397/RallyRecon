@@ -14,22 +14,9 @@
 		79D6C2AD2D42ABA20034C601 /* RallyRecon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RallyRecon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		79D6C2C12D42AC060034C601 /* Exceptions for "RallyRecon" folder in "RallyRecon" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"GoogleService-Info.plist",
-			);
-			target = 79D6C2AC2D42ABA20034C601 /* RallyRecon */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		79D6C2AF2D42ABA20034C601 /* RallyRecon */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				79D6C2C12D42AC060034C601 /* Exceptions for "RallyRecon" folder in "RallyRecon" target */,
-			);
 			path = RallyRecon;
 			sourceTree = "<group>";
 		};
