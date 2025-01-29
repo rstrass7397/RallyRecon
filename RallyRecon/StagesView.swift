@@ -11,9 +11,17 @@ struct StagesView: View {
     @State var inputText: String = ""
     @State var items: [String] = []
     @State var searchText = ""
+    var searchResults: [String] {
+            if searchText.isEmpty {
+                return items
+            } else {
+                return items.filter { $0.contains(searchText) }
+            }
+        }
     var body: some View {
         NavigationStack {
-            TextField("Enter text", text: $inputText, onCommit: addItem)
+            TextField("Enter text", text: $inputText, onCommit: addItem
+            )
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
@@ -25,13 +33,6 @@ struct StagesView: View {
         .searchable(text: $searchText)
             
     }
-    var searchResults: [String] {
-            if searchText.isEmpty {
-                return items
-            } else {
-                return items.filter { $0.contains(searchText) }
-            }
-        }
         func addItem() {
             guard !inputText.isEmpty else { return }
             items.append(inputText)
