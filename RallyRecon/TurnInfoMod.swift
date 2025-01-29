@@ -127,14 +127,6 @@ struct TurnInfoMod : View {
                             .background(RoundedRectangle(cornerRadius: 30).foregroundColor(isTrueTurns[6]! ? .blue : Color(red: 17 / 255, green: 51 / 255, blue: 95/255)))
                     }
                 }
-                
-                NavigationLink("Next", destination: DurationMod())
-                    .frame(width: 300, height: 80)
-                    .background(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
-                    .cornerRadius(20)
-                    .font(.system(size:40, weight: .bold))
-                    .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238/255))
-                    .padding(100)
             }
         }
     }

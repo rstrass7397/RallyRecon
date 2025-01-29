@@ -19,7 +19,7 @@ struct CreateARally: View {
                     .padding()
                     .textFieldStyle(.roundedBorder)
                     .foregroundColor(.black)
-                NavigationLink("Next", destination: TurnInfoMod())
+                NavigationLink("Next", destination: ModifierHub())
                     .frame(width: 300, height: 80)
                     .background(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
                     .cornerRadius(20)
