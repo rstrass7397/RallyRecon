@@ -10,25 +10,36 @@ import SwiftUI
 struct StagesView: View {
     @State var inputText: String = ""
     @State var items: [String] = []
+    @State var searchText = ""
     var body: some View {
-        TextField("Enter text", text: $inputText, onCommit: {
-            addItem()
-        })
-        .textFieldStyle(RoundedBorderTextFieldStyle())
-        .padding()
-
-        List(items, id: \.self) { item in
-            Text(item)
+        NavigationStack {
+            TextField("Enter text", text: $inputText, onCommit: addItem)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            List(searchResults, id: \.self) { item in
+                Text(item)
+            }
+            .navigationTitle("Rallies")
         }
+        .searchable(text: $searchText)
+            
     }
-    func addItem() {
+    var searchResults: [String] {
+            if searchText.isEmpty {
+                return items
+            } else {
+                return items.filter { $0.contains(searchText) }
+            }
+        }
+        func addItem() {
             guard !inputText.isEmpty else { return }
             items.append(inputText)
             DispatchQueue.main.async {
                 inputText = ""
             }
         }
-}
+    }
 
 #Preview {
     StagesView()
