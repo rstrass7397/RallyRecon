@@ -36,10 +36,13 @@ struct StagesView: View {
         func addItem() {
             guard !inputText.isEmpty else { return }
             items.append(inputText)
-            inputText = ""
+            DispatchQueue.main.async {
+                inputText = ""
+            }
         }
     }
 
 #Preview {
     StagesView()
 }
+
