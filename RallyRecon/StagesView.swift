@@ -11,22 +11,26 @@ struct StagesView: View {
     @State var inputText: String = ""
     @State var items: [String] = []
     var body: some View {
-        TextField("Enter text", text: $inputText, onCommit: addItem)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .padding()
+        TextField("Enter text", text: $inputText, onCommit: {
+            addItem()
+        })
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .padding()
 
         List(items, id: \.self) { item in
             Text(item)
         }
-
     }
     func addItem() {
             guard !inputText.isEmpty else { return }
             items.append(inputText)
-            inputText = ""
+            DispatchQueue.main.async {
+                inputText = ""
+            }
         }
 }
 
 #Preview {
     StagesView()
 }
+
