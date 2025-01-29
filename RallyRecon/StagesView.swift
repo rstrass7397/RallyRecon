@@ -26,7 +26,16 @@ struct StagesView: View {
                 .padding()
             
             List(searchResults, id: \.self) { item in
-                Text(item)
+                NavigationLink {
+                    Text(item)
+                    List{
+                        Text("1")
+                        Text("2")
+                        Text("3")
+                    }
+                } label: {
+                    Text(item)
+                }
             }
             .navigationTitle("Rallies")
         }
