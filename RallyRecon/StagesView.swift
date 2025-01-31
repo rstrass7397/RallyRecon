@@ -13,11 +13,11 @@ struct StagesView: View {
     @State var inputText: String = ""
     @State var items: [String] = []
     @State var searchText = ""
-    var searchResults: [String] {
+    var searchResults: [Test] {
             if searchText.isEmpty {
-                return items
+                return tests
             } else {
-                return items.filter { $0.contains(searchText) }
+                return tests.filter { item in item.name.contains(searchText) }
             }
         }
     var body: some View {
@@ -27,7 +27,7 @@ struct StagesView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            List(tests, id: \.self) { item in
+            List(searchResults, id: \.self) { item in
                 NavigationLink {
                     Text(item.name)
                     List{
