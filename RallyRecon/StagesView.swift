@@ -4,10 +4,12 @@
 //
 //  Created by Olivier Zdunczyk on 1/27/25.
 //
-
+import Firebase
 import SwiftUI
+import FirebaseFirestore
 
 struct StagesView: View {
+    @FirestoreQuery(collectionPath: "Test") var tests: [Test]
     @State var inputText: String = ""
     @State var items: [String] = []
     @State var searchText = ""
@@ -25,16 +27,16 @@ struct StagesView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            List(searchResults, id: \.self) { item in
+            List(tests, id: \.self) { item in
                 NavigationLink {
-                    Text(item)
+                    Text(item.name)
                     List{
                         Text("1")
                         Text("2")
                         Text("3")
                     }
                 } label: {
-                    Text(item)
+                    Text(item.name)
                 }
             }
             .navigationTitle("Rallies")
@@ -43,11 +45,12 @@ struct StagesView: View {
             
     }
         func addItem() {
-            guard !inputText.isEmpty else { return }
-            items.append(inputText)
+            let newTest = Test(name: inputText)
             DispatchQueue.main.async {
                 inputText = ""
             }
+            let dataBase = Firestore.firestore()
+            dataBase.collection("Test").document(newTest.name).setData(["name":newTest.name])
         }
     }
 
