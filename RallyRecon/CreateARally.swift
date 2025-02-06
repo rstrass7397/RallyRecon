@@ -24,7 +24,7 @@ struct CreateARally: View {
                     .textFieldStyle(.roundedBorder)
                     .foregroundColor(.black)
                     .font(.largeTitle)
-                NavigationLink("Next", destination: ModifierHub())
+                NavigationLink("Next", destination: CreateAStage())
                     .frame(width: 300, height: 80)
                     .background(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
                     .cornerRadius(20)
