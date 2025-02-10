@@ -1,9 +1,9 @@
-////
-////  StagesView.swift
-////  RallyRecon
-////
-////  Created by Olivier Zdunczyk on 1/27/25.
-////
+//
+//  StagesView.swift
+//  RallyRecon
+//
+//  Created by Olivier Zdunczyk on 1/27/25.
+//
 import Firebase
 import SwiftUI
 import FirebaseFirestore
