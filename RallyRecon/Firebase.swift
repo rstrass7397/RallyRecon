@@ -10,31 +10,29 @@ import SwiftUI
 
 struct Test: Decodable, Hashable {
     var name: String
-
-@Model
-class Rally: Hashable {
-    var turnDirection: String
-    var turnSharpness: Int
-    var turnDuration: String
-    var turnStraights: Int
-    var turnBumps: String
-    var turnCrests: String
-    var turnAdditionalNotes: String
-    var turnAdditionalNotes2: String
+    
+    @Model
+    class Rally: Hashable {
+        var turnDirection: String
+        var turnSharpness: Int
+        var turnDuration: String
+        var turnStraights: Int
+        var turnBumps: String
+        var turnCrests: String
+        var turnAdditionalNotes: String
+        var turnAdditionalNotes2: String
         
-    init(turnDirection: String, turnSharpness: Int, turnDuration: String, turnStraights: Int, turnBumps: String, turnCrests: String, turnAdditional: String, turnAdditional2: String) {
-        self.turnDirection = turnDirection
-        self.turnSharpness = turnSharpness
-        self.turnDuration = turnDuration
-        self.turnStraights = turnStraights
-        self.turnBumps = turnBumps
-        self.turnCrests = turnCrests
-        self.turnAdditionalNotes = turnAdditionalNotes
-        self.turnAdditionalNotes2 = turnAdditionalNotes2
-      
-
-        
+        init(turnDirection: String, turnSharpness: Int, turnDuration: String, turnStraights: Int, turnBumps: String, turnCrests: String, turnAdditionalNotes: String, turnAdditionalNotes2: String) {
+            self.turnDirection = turnDirection
+            self.turnSharpness = turnSharpness
+            self.turnDuration = turnDuration
+            self.turnStraights = turnStraights
+            self.turnBumps = turnBumps
+            self.turnCrests = turnCrests
+            self.turnAdditionalNotes = turnAdditionalNotes
+            self.turnAdditionalNotes2 = turnAdditionalNotes2
+            
+        }
     }
-}
-
+    
 }
