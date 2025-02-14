@@ -26,22 +26,33 @@ struct StagesView: View {
             )
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .font(.title)
+            
+            NavigationLink("Edit", destination: CreateARally())
+                .foregroundStyle(.black)
+                .font(.title)
 
             List(searchResults, id: \.self) { item in
                 NavigationLink {
                     Text(item.name)
+                        .font(.title)
                     List{
                         Text("1")
+                            .font(.title)
                         Text("2")
+                            .font(.title)
                         Text("3")
+                            .font(.title)
                     }
                 } label: {
                     Text(item.name)
+                        .font(.title)
                 }
             }
             .navigationTitle("Rallies")
         }
         .searchable(text: $searchText)
+        .font(.title)
 
     }
         func addItem() {
