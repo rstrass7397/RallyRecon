@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-class Firebase: Hashable {
+class rallyInfo: Hashable {
     var turnDirection: String
     var turnSharpness: Int
     var turnDuration: String
