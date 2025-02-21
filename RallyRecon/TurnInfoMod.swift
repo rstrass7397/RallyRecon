@@ -7,7 +7,9 @@
 import SwiftUI
 
 struct TurnInfoMod : View {
-    @State var isTrueTurns = ["left": false, "right": false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false]
+
+    @Observable
+    @StateObject var turnInfoData = RallyViewModel()
     var body: some View {
         ZStack{
             Color(red: 248 / 255, green: 248 / 255, blue: 238/255)
@@ -20,14 +22,12 @@ struct TurnInfoMod : View {
                     .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
                 HStack{
                     Button {
-                        isTrueTurns["left"]!.toggle()
-                        isTrueTurns["right"] = false
-                    } label: {
                         Text("Left")
                             .frame(width: 300, height: 300)
                             .foregroundColor(.white)
                             .font(.system(size:60, weight: .bold))
                             .background(RoundedRectangle(cornerRadius: 30).foregroundColor(isTrueTurns["left"]! ? .blue : Color(red: 17 / 255, green: 51 / 255, blue: 95/255)))
+                            .Hour
                     }
                     Button {
                         isTrueTurns["right"]!.toggle()
