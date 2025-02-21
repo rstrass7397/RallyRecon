@@ -23,6 +23,7 @@ class RallyViewModel {
             turnAdditionalNotes2: turnAdditionalNotes2
         )
         rallies.append(newRally)
+        let turnDatabase = Firestore.firestore()
         
         let rallyFirebase: [String: Any] = [
             "turnDirection": turnDirection,
@@ -34,7 +35,7 @@ class RallyViewModel {
             "turnAdditionalNotes": turnAdditionalNotes,
             "turnAdditionalNotes2": turnAdditionalNotes2
         ]
-        let turnDatabase = Firestore.firestore()
+        turnDatabase.collection("rallies").addDocument(data: rallyFirebase)
     }
 }
 
