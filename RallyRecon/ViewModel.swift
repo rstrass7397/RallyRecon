@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PaceNote: Identifiable, Codable {
+struct PaceNote: Identifiable, Codable, Equatable, Hashable {
     let id = UUID()
     var turnDirection: String
     var turnSharpness: String
@@ -18,7 +18,7 @@ struct PaceNote: Identifiable, Codable {
     var additionalModifiers: String
 }
 
-struct Stage: Identifiable, Codable {
+struct Stage: Identifiable, Codable, Hashable {
     let id = UUID()
     var name: String
     var paceNotes: [PaceNote]
