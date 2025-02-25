@@ -42,4 +42,20 @@ class Rally: Identifiable, ObservableObject {
 
 class RallyViewModel2: ObservableObject {
     @Published var rallies: [Rally] = []
+    
+    func addRally(name: String) {
+            let newRally = Rally(name: name)
+            rallies.append(newRally)
+        }
+
+        func addStage(to rally: Rally, name: String) {
+            let newStage = Stage(name: name)
+            if let index = rallies.firstIndex(where: { $0.id == rally.id }) {
+                rallies[index].stages.append(newStage)
+            }
+        }
+
+        func addPaceNote(to stage: inout Stage, note: PaceNote) {
+            stage.paceNotes.append(note)
+        }
 }
