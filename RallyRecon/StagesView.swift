@@ -9,30 +9,30 @@ import SwiftUI
 import FirebaseFirestore
 
 struct StagesView: View {
-    @FirestoreQuery(collectionPath: "Test") var tests: [Test]
+    @FirestoreQuery(collectionPath: "Rallies/{Test Rally}/Stages") var stages: [Stage]
     @State var inputText: String = ""
     @State var items: [String] = []
-    @State var searchText = ""
-    var searchResults: [Test] {
-            if searchText.isEmpty {
-                return tests
-            } else {
-                return tests.filter { item in item.name.contains(searchText) }
-            }
-        }
+    //    @State var searchText = ""
+    //    var searchResults: [Stage] {
+    //            if searchText.isEmpty {
+    //                return stages
+    //            } else {
+    //                return stages.filter { item in item.name.contains(searchText) }
+    //            }
+    //        }
     var body: some View {
         NavigationStack {
-            TextField("Enter text", text: $inputText, onCommit: addItem
+            TextField("Enter text", text: $inputText, onCommit: addStage
             )
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                .font(.title)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .padding()
+            .font(.title)
             
             NavigationLink("Edit", destination: CreateARally())
                 .foregroundStyle(.black)
                 .font(.title)
-
-            List(searchResults, id: \.self) { item in
+            
+            List(stages, id: \.self) { item in
                 NavigationLink {
                     Text(item.name)
                         .font(.title)
@@ -49,22 +49,22 @@ struct StagesView: View {
                         .font(.title)
                 }
             }
-            .navigationTitle("Rallies")
+            .navigationTitle("Stages")
         }
-        .searchable(text: $searchText)
+//        .searchable(text: $searchText)
         .font(.title)
-
+        
     }
-        func addItem() {
-            let newTest = Test(name: inputText)
-            DispatchQueue.main.async {
-                inputText = ""
-            }
-            let dataBase = Firestore.firestore()
-            dataBase.collection("Test").document(newTest.name).setData(["name":newTest.name])
+    func addStage() {
+        let newStage = Stage(name: inputText)
+        DispatchQueue.main.async {
+            inputText = ""
         }
+        let dataBase = Firestore.firestore()
+        dataBase.collection("Rallies").document("Test Rally").collection("Stages").document(newStage.name).setData(["name":newStage.name])
     }
-
+    
+}
 #Preview {
     StagesView()
 }
