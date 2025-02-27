@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct PaceNote: Identifiable, Codable, Equatable, Hashable {
     let id = UUID()
@@ -19,7 +21,7 @@ struct PaceNote: Identifiable, Codable, Equatable, Hashable {
 }
 
 struct Stage: Identifiable, Codable, Hashable {
-    let id = UUID()
+    @DocumentID var id: String?
     var name: String
     var paceNotes: [PaceNote]
 
