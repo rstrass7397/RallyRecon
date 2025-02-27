@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseFirestore
 
 struct StagesView: View {
-    @FirestoreQuery(collectionPath: "Rallies/{Test Rally}/Stages") var stages: [Stage]
+    @FirestoreQuery(collectionPath: "Rallies/Test Rally/Stages") var stages: [Stage]
     @State var inputText: String = ""
     @State var items: [String] = []
     //    @State var searchText = ""
@@ -32,22 +32,12 @@ struct StagesView: View {
                 .foregroundStyle(.black)
                 .font(.title)
             
-            List(stages, id: \.self) { item in
-                NavigationLink {
-                    Text(item.name)
+            List(stages, id: \.self) { stage in
+                    Text(stage.name)
                         .font(.title)
-                    List{
-                        Text("1")
-                            .font(.title)
-                        Text("2")
-                            .font(.title)
-                        Text("3")
-                            .font(.title)
-                    }
-                } label: {
-                    Text(item.name)
-                        .font(.title)
-                }
+            }
+            .onChange(of: stages) { newStages in
+                print("Stages updated: \(newStages)")
             }
             .navigationTitle("Stages")
         }
@@ -61,7 +51,12 @@ struct StagesView: View {
             inputText = ""
         }
         let dataBase = Firestore.firestore()
-        dataBase.collection("Rallies").document("Test Rally").collection("Stages").document(newStage.name).setData(["name":newStage.name])
+        dataBase
+            .collection("Rallies")
+            .document("Test Rally")
+            .collection("Stages")
+            .document(newStage.name)
+            .setData(["name":newStage.name])
     }
     
 }
