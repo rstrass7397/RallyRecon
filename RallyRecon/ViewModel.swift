@@ -23,11 +23,10 @@ struct PaceNote: Identifiable, Codable, Equatable, Hashable {
 struct Stage: Identifiable, Codable, Hashable {
     @DocumentID var id: String?
     var name: String
-    var paceNotes: [PaceNote]
+//    var paceNotes: [PaceNote]
 
-    init(name: String, paceNotes: [PaceNote] = []) {
+    init(name: String) {
         self.name = name
-        self.paceNotes = paceNotes
     }
 }
 
@@ -57,7 +56,7 @@ class RallyViewModel2: ObservableObject {
             }
         }
 
-        func addPaceNote(to stage: inout Stage, note: PaceNote) {
-            stage.paceNotes.append(note)
-        }
+//        func addPaceNote(to stage: inout Stage, note: PaceNote) {
+//            stage.paceNotes.append(note)
+//        }
 }

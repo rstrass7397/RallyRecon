@@ -12,14 +12,6 @@ struct StagesView: View {
     @FirestoreQuery(collectionPath: "Rallies/Test Rally/Stages") var stages: [Stage]
     @State var inputText: String = ""
     @State var items: [String] = []
-    //    @State var searchText = ""
-    //    var searchResults: [Stage] {
-    //            if searchText.isEmpty {
-    //                return stages
-    //            } else {
-    //                return stages.filter { item in item.name.contains(searchText) }
-    //            }
-    //        }
     var body: some View {
         NavigationStack {
             TextField("Enter text", text: $inputText, onCommit: addStage
@@ -36,12 +28,8 @@ struct StagesView: View {
                     Text(stage.name)
                         .font(.title)
             }
-            .onChange(of: stages) { newStages in
-                print("Stages updated: \(newStages)")
-            }
             .navigationTitle("Stages")
         }
-//        .searchable(text: $searchText)
         .font(.title)
         
     }
