@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct NotesPage: View {
     var body: some View {
+        
         NavigationStack{
             ZStack{
                 Color(red: 248 / 255, green: 248 / 255, blue: 238/255)
@@ -51,8 +54,34 @@ struct NotesPage: View {
                         .cornerRadius(20)
                         .font(.system(size:40, weight: .bold))
                         .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238/255))
+                    
+                    
+                    }
+                    
                 }
             }
+        }
+    struct PaceNote: Identifiable, Codable, Equatable, Hashable {
+        let id = UUID()
+        var turnDirection: String
+        var turnSharpness: String
+        var duration: String
+        var straights: String
+        var bumps: String
+        var crests: String
+        var additionalModifiers: String
+    }
+    struct Stage: Identifiable, Codable, Hashable {
+        @DocumentID var id: String?
+        var name: String
+        var paceNotes: [PaceNote]
+
+        init(name: String, paceNotes: [PaceNote] = []) {
+            self.name = name
+            self.paceNotes = paceNotes
+        }
+        func addPaceNote(to stage: inout Stage, note: PaceNote) {
+            stage.paceNotes.append(note)
         }
     }
 }
