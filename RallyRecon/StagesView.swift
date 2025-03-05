@@ -20,10 +20,6 @@ struct StagesView: View {
             .padding()
             .font(.title)
             
-            NavigationLink("Edit", destination: CreateARally())
-                .foregroundStyle(.black)
-                .font(.title)
-            
             List(stages, id: \.self) { stage in
                     Text(stage.name)
                         .font(.title)

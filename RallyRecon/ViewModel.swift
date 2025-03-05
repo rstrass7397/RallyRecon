@@ -30,33 +30,11 @@ struct Stage: Identifiable, Codable, Hashable {
     }
 }
 
-class Rally: Identifiable, ObservableObject {
-    let id = UUID()
+struct Rally: Identifiable, Codable, Hashable {
+    @DocumentID var id: String?
     var name: String
-    @Published var stages: [Stage]
 
-    init(name: String, stages: [Stage] = []) {
+    init(name: String) {
         self.name = name
-        self.stages = stages
     }
-}
-
-class RallyViewModel2: ObservableObject {
-    @Published var rallies: [Rally] = []
-    
-    func addRally(name: String) {
-            let newRally = Rally(name: name)
-            rallies.append(newRally)
-        }
-
-        func addStage(to rally: Rally, name: String) {
-            let newStage = Stage(name: name)
-            if let index = rallies.firstIndex(where: { $0.id == rally.id }) {
-                rallies[index].stages.append(newStage)
-            }
-        }
-
-//        func addPaceNote(to stage: inout Stage, note: PaceNote) {
-//            stage.paceNotes.append(note)
-//        }
 }

@@ -7,10 +7,6 @@ struct SavedRallys: View {
     @State var inputText: String = ""
     
     var body: some View {
-        ZStack{
-            Color(red: 248 / 255, green: 248 / 255, blue: 238/255)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .ignoresSafeArea()
             
             VStack{
                 Text("Saved Rallies")
@@ -18,46 +14,32 @@ struct SavedRallys: View {
                     .padding(30)
                     .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
                 
-                NavigationLink("View Saved Stages", destination: StagesView())
-                    .frame(width: 400, height: 80)
-                    .background(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
-                    .cornerRadius(20)
-                    .font(.system(size:40, weight: .bold))
-                    .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238/255))
-                    .padding(30)
                 
-                NavigationLink("Edit", destination: ModifierHub())
-                    .frame(width: 300, height: 80)
-                    .background(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
-                    .cornerRadius(20)
-                    .font(.system(size:40, weight: .bold))
-                    .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238/255))
-                    .padding(30)
+                TextField("Enter text", text: $inputText, onCommit: addRally
+                )
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .font(.title)
+                
+                List(rallies, id: \.self) { rally in
+                    Text(rally.name)
+                        .font(.title)
+                }
+                .navigationTitle("Stages")
             }
+            .font(.title)
         }
-    }
     
-    
-    struct Rally: Identifiable, Decodable {
-        @DocumentID var id: String?
-        var name: String
-        var stages: [Stage]
-    }
-
-   
-    struct Stage: Identifiable, Decodable {
-        var id: String
-        var name: String
-        
-    }
-
-    class RallyViewModel2: ObservableObject {
-        @Published var rallies: [Rally] = []
-        
-        func addRally(name: String) {
-            let newRally = Rally(id: UUID().uuidString, name: name, stages: [])
-            rallies.append(newRally)
+    func addRally() {
+        let newRally = Rally(name: inputText)
+        DispatchQueue.main.async {
+            inputText = ""
         }
+        let dataBase = Firestore.firestore()
+        dataBase
+            .collection("Rallies")
+            .document(newRally.name)
+            .setData(["name":newRally.name])
     }
 }
 
