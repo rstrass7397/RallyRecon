@@ -1,33 +1,56 @@
-////
-////  Model.swift
-////  RallyRecon
-////
-////  Created by Ananya A. Maru on 2/27/25.
-////
 //
-//import SwiftData
-//import SwiftUI
+//  Model.swift
+//  RallyRecon
 //
-//@Model
-//class rallyModel: Hashable, ObservableObject {
-//    @Published var turnDirection: String
-//    @Published var turnSharpness: Int
-//    @Published var turnDuration: String
-//    @Published var turnStraights: Int
-//    @Published var turnBumps: String
-//    @Published var turnCrests: String
-//    @Published var turnAdditionalNotes: String
-//    @Published var turnAdditionalNotes2: String
-//    
-//    init(turnDirection: String, turnSharpness: Int, turnDuration: String, turnStraights: Int, turnBumps: String, turnCrests: String, turnAdditionalNotes: String, turnAdditionalNotes2: String) {
-//        self.turnDirection = turnDirection
-//        self.turnSharpness = turnSharpness
-//        self.turnDuration = turnDuration
-//        self.turnStraights = turnStraights
-//        self.turnBumps = turnBumps
-//        self.turnCrests = turnCrests
-//        self.turnAdditionalNotes = turnAdditionalNotes
-//        self.turnAdditionalNotes2 = turnAdditionalNotes2
-//        
-//    }
-//}
+//  Created by Olivier Zdunczyk on 3/7/25.
+//
+
+import SwiftUI
+import Firebase
+import FirebaseFirestore
+
+struct PaceNote: Identifiable, Codable, Equatable, Hashable {
+    let id: UUID
+    var turnDirection: String
+    var turnSharpness: String
+    var duration: String
+    var straights: String
+    var bumps: String
+    var crests: String
+    var additionalModifiers: String
+    
+    init(turnDirection: String, turnSharpness: String, duration: String, straights: String, bumps: String, crests: String, additionalModifiers: String) {
+        self.id = UUID()
+        self.turnDirection = turnDirection
+        self.turnSharpness = turnSharpness
+        self.duration = duration
+        self.straights = straights
+        self.bumps = bumps
+        self.crests = crests
+        self.additionalModifiers = additionalModifiers
+    }
+}
+
+struct Stage: Identifiable, Codable, Hashable {
+    @DocumentID var id: String?
+    var name: String
+    var paceNotes: [PaceNote]
+    
+    init(name: String, paceNotes: [PaceNote] = []) {
+        self.id = nil
+        self.name = name
+        self.paceNotes = paceNotes
+    }
+}
+
+struct Rally: Identifiable, Codable, Hashable {
+    @DocumentID var id: String?
+    var name: String
+    var stages: [Stage]
+    
+    init(name: String, stages: [Stage] = []) {
+        self.id = nil
+        self.name = name
+        self.stages = stages
+    }
+}
