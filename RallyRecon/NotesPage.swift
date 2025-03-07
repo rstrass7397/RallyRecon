@@ -10,6 +10,9 @@ import Firebase
 import FirebaseFirestore
 
 struct NotesPage: View {
+    @FirestoreQuery(collectionPath: "Rallies/Test Rally/Notes") var notes: [PaceNote]
+    @State var inputText: String = ""
+    @State var items: [String] = []
     var body: some View {
         
         NavigationStack{
@@ -18,18 +21,41 @@ struct NotesPage: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea()
                 VStack{
+//                    TextField("Enter text", text: $inputText, onCommit: addNote
+//                    )
                     
                     Spacer()
                         .frame(height: 10)
                     
-                    Text("Notes Placeholder")
-                        .frame(width: 1000, height: 100, alignment: .top)
-                        .font(.system(size:90, weight: .bold))
-                        .padding(.bottom, 150)
-                        .padding(.top, -50)
-                        .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
+//                    List(notes, id: \.self) { note in
+//                            Text(note.name)
+//                                .font(.title)
+//                        
+//                    }
+//                    .navigationTitle("Notes")
+
                     
+//                    Text("Notes Placeholder")
+//                        .frame(width: 1000, height: 100, alignment: .top)
+//                        .font(.system(size:90, weight: .bold))
+//                        .padding(.bottom, 150)
+//                        .padding(.top, -50)
+//                        .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
                     
+//                    func addNote() {
+//                        let newNote = PaceNote(name : inputText)
+//                        DispatchQueue.main.async {
+//                            inputText = ""
+//                        }
+//                        let dataBase = Firestore.firestore()
+//                        dataBase
+//                            .collection("Rallies")
+//                            .document("Test Rally")
+//                            .collection("Stages")
+//                            .document(newStage.name)
+//                            .setData(["name":newStage.name])
+//
+//                    }
                     
                     NavigationLink("New Note", destination: ModifierHub())
                         .frame(width: 300, height: 80)

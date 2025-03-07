@@ -20,9 +20,12 @@ struct StagesView: View {
             .padding()
             .font(.title)
             
+            NavigationLink("View Saved Rallies", destination: SavedRallys())
+                .foregroundColor(.black)
             List(stages, id: \.self) { stage in
                     Text(stage.name)
                         .font(.title)
+                
             }
             .navigationTitle("Stages")
         }
