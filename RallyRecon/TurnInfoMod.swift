@@ -9,7 +9,7 @@ import Firebase
 import FirebaseFirestore
 
 struct TurnInfoMod : View {
-//    @State var turnInfoData = rallyModel()
+    @ObservableObject var rallyViewModel: RallyViewModel
     var body: some View {
         
         ZStack{
