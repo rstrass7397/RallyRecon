@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
-import FirebaseFirestore
 
 class RallyViewModel: ObservableObject {
     @Published var rallies: [Rally] = []
