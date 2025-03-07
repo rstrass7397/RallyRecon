@@ -22,6 +22,7 @@ struct StagesView: View {
             
             NavigationLink("View Saved Rallies", destination: SavedRallys())
                 .foregroundColor(.black)
+            
             List(stages, id: \.self) { stage in
                     Text(stage.name)
                         .font(.title)
