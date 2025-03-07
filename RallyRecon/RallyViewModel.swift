@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 @Observable
-class RallyViewModel {
+class RallyViewModel: ObservableObject {
     @Published var rallies: [rallyModel] = []
     
     func addRally(turnDirection: String, turnSharpness: Int, turnDuration: String, turnStraights: Int, turnBumps: String, turnCrests: String, turnAdditionalNotes: String, turnAdditionalNotes2: String) {

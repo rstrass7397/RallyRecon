@@ -9,15 +9,15 @@ import SwiftData
 import SwiftUI
 
 @Model
-class rallyModel: Hashable, ObservableObject {
-    @Published var turnDirection: String
-    @Published var turnSharpness: Int
-    @Published var turnDuration: String
-    @Published var turnStraights: Int
-    @Published var turnBumps: String
-    @Published var turnCrests: String
-    @Published var turnAdditionalNotes: String
-    @Published var turnAdditionalNotes2: String
+class rallyModel: Hashable {
+    var turnDirection: String
+    var turnSharpness: Int
+    var turnDuration: String
+    var turnStraights: Int
+    var turnBumps: String
+    var turnCrests: String
+    var turnAdditionalNotes: String
+    var turnAdditionalNotes2: String
     
     init(turnDirection: String, turnSharpness: Int, turnDuration: String, turnStraights: Int, turnBumps: String, turnCrests: String, turnAdditionalNotes: String, turnAdditionalNotes2: String) {
         self.turnDirection = turnDirection
@@ -28,6 +28,5 @@ class rallyModel: Hashable, ObservableObject {
         self.turnCrests = turnCrests
         self.turnAdditionalNotes = turnAdditionalNotes
         self.turnAdditionalNotes2 = turnAdditionalNotes2
-        
     }
 }
