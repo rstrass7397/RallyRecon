@@ -5,11 +5,12 @@
 //  Created by Ryan S. Strass on 12/13/24.
 
 import SwiftUI
-import Firebase
-import FirebaseFirestore
 
 struct TurnInfoMod : View {
+<<<<<<< HEAD
     @ObservedObject var turnInfoModel: RallyViewModel
+=======
+>>>>>>> main
     var body: some View {
         
         ZStack{
