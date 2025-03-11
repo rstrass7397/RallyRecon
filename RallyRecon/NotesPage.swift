@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct NotesPage: View {
-    @FirestoreQuery(collectionPath: "Rallies/Test Rally/Notes") var notes: [PaceNote]
     @State var inputText: String = ""
     @State var items: [String] = []
     var body: some View {
