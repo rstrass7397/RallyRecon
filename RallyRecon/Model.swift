@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-class rallyModel: Hashable {
+class PaceNotes: Identifiable {
     var id: UUID = UUID()
     var turnDirection: String
     var turnSharpness: Int
@@ -21,6 +21,7 @@ class rallyModel: Hashable {
     var turnAdditionalNotes2: String
     
     init(turnDirection: String, turnSharpness: Int, turnDuration: String, turnStraights: Int, turnBumps: String, turnCrests: String, turnAdditionalNotes: String, turnAdditionalNotes2: String) {
+        self.id = UUID()
         self.turnDirection = turnDirection
         self.turnSharpness = turnSharpness
         self.turnDuration = turnDuration
@@ -29,6 +30,18 @@ class rallyModel: Hashable {
         self.turnCrests = turnCrests
         self.turnAdditionalNotes = turnAdditionalNotes
         self.turnAdditionalNotes2 = turnAdditionalNotes2
-       
     }
+    
+    struct Stage: Identifiable {
+        let id = UUID()
+        var name: String
+        var stages: [Stage] = []
+    }
+    
+    struct Rally: Identifiable {
+        let id = UUID()
+        var name: String
+        var rallies: [Rally] = []
+    }
+    
 }

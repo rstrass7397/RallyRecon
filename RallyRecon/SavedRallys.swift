@@ -12,17 +12,17 @@ struct SavedRallys: View {
                     .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
                 
                 
-                TextField("Enter text", text: $inputText, onCommit: addRally
+                TextField("Enter text", text: $inputText
                 )
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .font(.title)
                 
-                List(rallies, id: \.self) { rally in
-                    Text(rally.name)
-                        .font(.title)
-                }
-                .navigationTitle("Stages")
+//                List(rallies, id: \.self) { rally in
+//                    Text(rally.name)
+//                        .font(.title)
+//                }
+//                .navigationTitle("Stages")
             }
             .font(.title)
         }

@@ -7,6 +7,6 @@
 
 import SwiftUI
 
-class RallyViewModel: ObservableObject {
-    @Published var rallies: [Rally] = []
-}
+//class RallyViewModel: ObservableObject {
+//    @Published var rallies: [Rally] = []
+//}
