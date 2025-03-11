@@ -9,7 +9,7 @@ import Firebase
 import FirebaseFirestore
 
 struct TurnInfoMod : View {
-    @ObservableObject var rallyViewModel: RallyViewModel
+    @ObservedObject var turnInfoModel: RallyViewModel
     var body: some View {
         
         ZStack{
@@ -25,7 +25,7 @@ struct TurnInfoMod : View {
                 
                 HStack{
                     Button {
-//                        rallyModel.turnDirection = "Left"
+                        turnInfoModel.turnDirection = "Left"
                     } label: {
                         Text("Left")
                             .frame(width: 300, height: 300)
@@ -35,7 +35,7 @@ struct TurnInfoMod : View {
                     }
                     
                     Button {
-//                        rallyModel.turnDirection = "Right"
+                        turnInfoModel.turnDirection = "Right"
                     } label: {
                         Text("Right")
                             .frame(width: 300, height: 300)
@@ -47,7 +47,7 @@ struct TurnInfoMod : View {
                 
                 HStack{
                     Button {
-//                        rallyModel.turnSharpness = 1
+                        turnInfoModel.turnSharpness = 1
                     } label: {
                         Text("1")
                             .frame(width: 300, height: 300)
@@ -57,7 +57,7 @@ struct TurnInfoMod : View {
                     }
                     
                     Button {
-//                        rallyModel.turnSharpness = 2
+                        turnInfoModel.turnSharpness = 2
                     } label: {
                         Text("2")
                             .frame(width: 300, height: 300)
@@ -67,7 +67,7 @@ struct TurnInfoMod : View {
                     }
                     
                     Button {
-//                        rallyModel.turnSharpness = 3
+                        rallyViewModel.turnSharpness = 3
                     } label: {
                         Text("3")
                             .frame(width: 300, height: 300)
@@ -77,7 +77,7 @@ struct TurnInfoMod : View {
                     }
                     
                     Button {
-//                        rallyModel.turnSharpness = 4
+                        turnInfoModel.turnSharpness = 4
                     } label: {
                         Text("4")
                             .frame(width: 300, height: 300)
@@ -87,7 +87,7 @@ struct TurnInfoMod : View {
                     }
                     
                     Button {
-//                        rallyModel.turnSharpness = 5
+                        turnInfoModel.turnSharpness = 5
                     } label: {
                         Text("5")
                             .frame(width: 300, height: 300)
@@ -97,7 +97,7 @@ struct TurnInfoMod : View {
                     }
                     
                     Button {
-//                        rallyModel.turnSharpness = 6
+                        turnInfoModel.turnSharpness = 6
                     } label: {
                         Text("6")
                             .frame(width: 300, height: 300)
@@ -113,7 +113,7 @@ struct TurnInfoMod : View {
 }
 
 #Preview {
-    TurnInfoMod()
+    turnInfoModel()
 }
 
 

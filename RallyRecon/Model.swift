@@ -10,6 +10,7 @@ import SwiftUI
 
 @Model
 class rallyModel: Hashable {
+    var id: UUID = UUID()
     var turnDirection: String
     var turnSharpness: Int
     var turnDuration: String
@@ -28,5 +29,6 @@ class rallyModel: Hashable {
         self.turnCrests = turnCrests
         self.turnAdditionalNotes = turnAdditionalNotes
         self.turnAdditionalNotes2 = turnAdditionalNotes2
+       
     }
 }
