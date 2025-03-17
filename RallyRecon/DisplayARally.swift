@@ -9,9 +9,10 @@ import SwiftUI
 
 struct DisplayARally : View {
     @State var addStage : String = ""
+    @Binding var currentRally: String
     let stages = [""]
     var body: some View {
-        
+        Text("\(currentRally)")
         TextField("Add a stage", text: $addStage)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding()
@@ -25,8 +26,4 @@ struct DisplayARally : View {
         
         
     }
-}
-
-#Preview {
-    DisplayARally()
 }
