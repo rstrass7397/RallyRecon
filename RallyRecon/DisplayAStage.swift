@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DisplayARally : View {
+struct DisplayAStage : View {
     @State var addStage : String = ""
     @Binding var currentRally: String
     let stages = [""]
