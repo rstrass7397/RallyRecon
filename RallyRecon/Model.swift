@@ -8,8 +8,7 @@
 import SwiftData
 import SwiftUI
 
-@Model
-class PaceNotes: Identifiable {
+@Model class PaceNotes: Identifiable {
     var id: UUID = UUID()
     var turnDirection: String
     var turnSharpness: Int
