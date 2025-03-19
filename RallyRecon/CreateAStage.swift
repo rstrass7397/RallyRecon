@@ -8,13 +8,14 @@ import SwiftUI
 
 struct CreateAStage: View {
     @State var StageName = ""
+    @Binding var currentRally: String
     var body: some View {
         ZStack{
             Color(red: 248 / 255, green: 248 / 255, blue: 238/255)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
             VStack{
-                Text("Enter The Stage Name")
+                Text("\(currentRally)")
                     .font(.system(size:75, weight: .bold))
                     .padding(30)
                     .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
@@ -35,8 +36,5 @@ struct CreateAStage: View {
         }
        
     }
-}
-#Preview {
-    CreateAStage()
 }
 
