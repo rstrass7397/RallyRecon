@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SavedRallys: View {
+struct SavedRallies: View {
     @State var inputText: String = ""
     
     var body: some View {
@@ -12,11 +12,6 @@ struct SavedRallys: View {
                     .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
                 
                 
-                TextField("Enter text", text: $inputText
-                )
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                .font(.title)
                 
 //                List(rallies, id: \.self) { rally in
 //                    Text(rally.name)
@@ -25,11 +20,13 @@ struct SavedRallys: View {
 //                .navigationTitle("Stages")
             }
             .font(.title)
+            .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure background fills entire screen
+                       .background(Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255))
         }
     }
 
 #Preview {
-    SavedRallys()
+    SavedRallies()
 }
 
 

@@ -22,6 +22,8 @@ struct EditPaceNotes: View {
                     .frame(width: 200.0, height: 200.0)
                 
                 }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                       .background(Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255))
             }
         }
     }
