@@ -29,6 +29,9 @@ struct DisplayAStage : View {
                     stages.append(addStage)
                     addStage = ""
                 }
+            NavigationLink("Add Note", destination: ModifierHub())
+                .font(.system(size:40, weight: .bold))
+                .foregroundColor(.black)
             List {
                 ForEach(stages,id: \.self){ stage  in
                     NavigationLink {
