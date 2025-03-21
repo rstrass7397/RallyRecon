@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SavedRallys: View {
     @State var inputText: String = ""
-    
+    @State var rallies: [Rally] = []
     var body: some View {
             
             VStack{
@@ -18,11 +18,12 @@ struct SavedRallys: View {
                 .padding()
                 .font(.title)
                 
-//                List(rallies, id: \.self) { rally in
-//                    Text(rally.name)
-//                        .font(.title)
-//                }
-//                .navigationTitle("Stages")
+                List(rallies, id: \.name) { rally in
+                NavigationLink(destination: StageListView(rally: rally)) {
+                    Text(rally.name)
+                }
+            }
+            .navigationBarItems(trailing: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies)))
             }
             .font(.title)
         }

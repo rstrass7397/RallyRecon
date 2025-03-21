@@ -11,7 +11,7 @@ import SwiftUI
 struct RallyReconApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RallyListView()
         }
     }
 }

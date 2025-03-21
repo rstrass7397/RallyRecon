@@ -23,12 +23,10 @@ struct DisplayAStage : View {
             }
         List {
             ForEach(stages,id: \.self){ stage  in
-                NavigationLink {
-                    Text(stage)
-                    Text("hello")
-                    } label: {
+                NavigationLink(destination: StagesView(), label: {
                         Text(stage)
                     }
+                )
             }
         }
         .frame(width: 800, height: 900)
