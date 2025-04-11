@@ -1,4 +1,3 @@
-import SwiftUI
 
 import SwiftUI
 
@@ -12,7 +11,7 @@ struct StageDetailView: View {
                 .font(.largeTitle)
                 .padding()
             
-            // Display the list of true modifiers for the stage
+
             VStack {
                 Text("True Modifiers for \(stage.name):")
                     .font(.title2)
@@ -25,7 +24,7 @@ struct StageDetailView: View {
                 }
             }
             
-            // NavigationLink to TurnInfoMod, passing bindings to isTrueTurns and trueModifiers
+
             NavigationLink("Add Modifier", destination: TurnInfoMod(isTrueTurns: $stage.isTrueTurns, trueModifiers: $stage.trueModifiers))
                 .padding()
                 .frame(width: 300, height: 50)

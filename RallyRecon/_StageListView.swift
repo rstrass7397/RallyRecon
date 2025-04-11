@@ -1,9 +1,4 @@
-//
-//  _StageListView.swift
-//  RallyRecon
-//
-//  Created by Ryan S. Strass on 3/19/25.
-//
+
 import SwiftUI
 
 struct StageListView: View {
