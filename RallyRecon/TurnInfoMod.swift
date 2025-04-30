@@ -41,6 +41,26 @@ struct TurnInfoMod: View {
                     toggleModifier(key: "2")
                 }
                 .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["2"]!))
+                
+                Button("3") {
+                    toggleModifier(key: "3")
+                }
+                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["3"]!))
+                
+                Button("4") {
+                    toggleModifier(key: "4")
+                }
+                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["4"]!))
+                
+                Button("5") {
+                    toggleModifier(key: "5")
+                }
+                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["5"]!))
+                
+                Button("6") {
+                    toggleModifier(key: "6")
+                }
+                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["6"]!))
             }
 
             // Add a button to save and show true values
