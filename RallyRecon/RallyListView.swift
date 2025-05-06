@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 
 struct RallyListView: View {
@@ -8,6 +6,13 @@ struct RallyListView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text("Rallies")
+                    .font(.largeTitle)
+                    .padding()
+                
+                List(rallies, id: \.name) { rally in
+                    NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
+                        Text(rally.name)
                 ZStack{
                     Color(red: 248 / 255, green: 248 / 255, blue: 238/255)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)

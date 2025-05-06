@@ -1,62 +1,87 @@
-//
- //  TurnInfoMod.swift
- //  RallyRecon
- //
- //  Created by Ryan S. Strass on "12"/"13"/"24".
- //
+
  
 import SwiftUI
 
 struct TurnInfoMod: View {
     @Binding var isTrueTurns: [String: Bool]
-    @Binding var trueModifiers: [String]
-    @State private var isTrueValuesVisible: Bool = false
+    var onSave: ([String]) -> Void
+
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        VStack {
-            Text("Choose Turn Modifiers")
-                .font(.title)
-                .padding()
+        ZStack {
+            Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
             
-            
-            HStack {
-                Button("Left") {
-                    toggleModifier(key: "left")
-                }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["left"]!))
+            VStack {
+                Text("Turns")
+                    .font(.system(size: 90, weight: .bold))
+                    .padding(30)
+                    .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
 
-                Button("Right") {
-                    toggleModifier(key: "right")
-                }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["right"]!))
-            }
 
-            HStack {
-                Button("1") {
-                    toggleModifier(key: "1")
+                HStack {
+                    Button {
+                        isTrueTurns["left"] = true
+                        isTrueTurns["right"] = false
+                    } label: {
+                        Text("Left")
+                            .frame(width: 300, height: 300)
+                            .foregroundColor(.white)
+                            .font(.system(size: 60, weight: .bold))
+                            .background(RoundedRectangle(cornerRadius: 30).foregroundColor(isTrueTurns["left"]! ? .blue : Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255)))
+                    }
+                    
+                    Button {
+                        isTrueTurns["right"] = true
+                        isTrueTurns["left"] = false
+                    } label: {
+                        Text("Right")
+                            .frame(width: 300, height: 300)
+                            .foregroundColor(.white)
+                            .font(.system(size: 60, weight: .bold))
+                            .background(RoundedRectangle(cornerRadius: 30).foregroundColor(isTrueTurns["right"]! ? .blue : Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255)))
+                    }
                 }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["1"]!))
                 
-                Button("2") {
-                    toggleModifier(key: "2")
+                HStack(spacing: 10) {
+                    ForEach(["1", "2", "3", "4", "5", "6"], id: \.self) { num in
+                        Button {
+                            for i in 1...6 {
+                                isTrueTurns["\(i)"] = (num == "\(i)")
+                            }
+                        } label: {
+                            Text(num)
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(.white)
+                                .font(.system(size: 40, weight: .bold))
+                                .background(RoundedRectangle(cornerRadius: 30).foregroundColor(isTrueTurns[num]! ? .blue : Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255)))
+                        }
+                    }
                 }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["2"]!))
-                
-                Button("3") {
-                    toggleModifier(key: "3")
+
+                Button("Save and Return") {
+                    let directions = ["left", "right"]
+                    let numbers = ["1", "2", "3", "4", "5", "6"]
+
+                    if let selectedDirection = directions.first(where: { isTrueTurns[$0] == true }),
+                       let selectedNumber = numbers.first(where: { isTrueTurns[$0] == true }) {
+                        onSave([selectedDirection, selectedNumber])
+                    }
+
+                    for key in isTrueTurns.keys {
+                        isTrueTurns[key] = false
+                    }
+
+                    dismiss()
                 }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["3"]!))
-                
-                Button("4") {
-                    toggleModifier(key: "4")
-                }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["4"]!))
-                
-                Button("5") {
-                    toggleModifier(key: "5")
-                }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["5"]!))
-                
+                .frame(width: 300, height: 80)
+                .background(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
+                .cornerRadius(20)
+                .font(.system(size: 30, weight: .bold))
+                .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255))
+                .padding(60)
                 Button("6") {
                     toggleModifier(key: "6")
                 }
@@ -109,22 +134,6 @@ struct TurnInfoMod: View {
         for key in isTrueTurns.keys {
             isTrueTurns[key] = false
         }
-    }
-}
-
-struct RoundedRectangleButtonStyle: ButtonStyle {
-    var isSelected: Bool
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(isSelected ? .blue : Color.gray)
-                            .frame(width: 100, height: 100))
-            .foregroundColor(.white)
-            .font(.title)
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
-            .animation(.easeInOut, value: configuration.isPressed)
     }
 }
 

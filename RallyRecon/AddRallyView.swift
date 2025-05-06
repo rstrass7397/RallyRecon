@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct AddRallyView: View {
@@ -14,6 +13,7 @@ struct AddRallyView: View {
             Button("Add Rally") {
                 let newRally = Rally(name: rallyName, stages: [])
                 rallies.append(newRally)
+                PersistenceManager.saveRallies(rallies: rallies)
                 rallyName = ""
             }
             .padding()
