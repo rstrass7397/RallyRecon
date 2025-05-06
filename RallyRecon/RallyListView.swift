@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 
 struct RallyListView: View {
@@ -13,7 +11,7 @@ struct RallyListView: View {
                     .padding()
                 
                 List(rallies, id: \.name) { rally in
-                    NavigationLink(destination: StageListView(rally: rally)) {
+                    NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
                         Text(rally.name)
                     }
                 }

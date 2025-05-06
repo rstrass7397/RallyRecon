@@ -1,14 +1,8 @@
-
 import SwiftUI
 
 struct StageListView: View {
     var rally: Rally
-    @State var stages: [Stage]
-    
-    init(rally: Rally) {
-        self.rally = rally
-        self._stages = State(initialValue: rally.stages)
-    }
+    @Binding var stages: [Stage]
     
     var body: some View {
         VStack {
@@ -17,9 +11,8 @@ struct StageListView: View {
                 .padding()
             
             List(stages.indices, id: \.self) { index in
-                let stage = stages[index]
                 NavigationLink(destination: StageDetailView(stage: $stages[index], stages: $stages)) {
-                    Text(stage.name)
+                    Text(stages[index].name)
                 }
             }
             
@@ -27,5 +20,4 @@ struct StageListView: View {
         }
     }
 }
-
 
