@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TurnInfoMod: View {
     @Binding var isTrueTurns: [String: Bool]
-    @Binding var trueModifiers: [String] // List to store true modifiers for this stage
-    @State private var isTrueValuesVisible: Bool = false  // Control visibility of the true values
+    @Binding var trueModifiers: [String]
+    @State private var isTrueValuesVisible: Bool = false
 
     var body: some View {
         VStack {
@@ -18,7 +18,7 @@ struct TurnInfoMod: View {
                 .font(.title)
                 .padding()
             
-            // Buttons for each modifier
+            
             HStack {
                 Button("Left") {
                     toggleModifier(key: "left")
@@ -63,15 +63,15 @@ struct TurnInfoMod: View {
                 .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["6"]!))
             }
 
-            // Add a button to save and show true values
+            
             Button("Save Modifiers") {
                 updateTrueModifiers()
                 resetModifiers()
-                isTrueValuesVisible.toggle()  // Show true values
+                isTrueValuesVisible.toggle()
             }
             .padding()
 
-            // Display the true values
+            
             if isTrueValuesVisible {
                 VStack {
                     Text("Selected Turn Modifiers:")
@@ -89,7 +89,7 @@ struct TurnInfoMod: View {
         .navigationBarTitle("Turn Modifiers", displayMode: .inline)
     }
     
-    // Function to toggle modifiers and add to true values list
+    
     private func toggleModifier(key: String) {
         if isTrueTurns[key]! {
             isTrueTurns[key] = false
@@ -98,13 +98,13 @@ struct TurnInfoMod: View {
         }
     }
     
-    // Update the trueModifiers list based on true values
+    
     private func updateTrueModifiers() {
         let selectedModifiers = isTrueTurns.filter { $0.value == true }.map { $0.key }
         trueModifiers.append(contentsOf: selectedModifiers)
     }
     
-    // Reset all modifiers to false after saving
+   
     private func resetModifiers() {
         for key in isTrueTurns.keys {
             isTrueTurns[key] = false
