@@ -22,3 +22,6 @@ struct RallyListView: View {
         }
     }
 }
+#Preview {
+    RallyListView()
+}

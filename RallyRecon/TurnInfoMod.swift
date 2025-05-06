@@ -127,3 +127,4 @@ struct RoundedRectangleButtonStyle: ButtonStyle {
             .animation(.easeInOut, value: configuration.isPressed)
     }
 }
+
