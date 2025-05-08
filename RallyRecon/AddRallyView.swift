@@ -27,14 +27,15 @@ struct AddRallyView: View {
                 .font(.system(size:20, weight: .bold))
                 .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238/255))
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            Button("Add Rally") {
-                let newRally = Rally(name: rallyName, stages: [])
-                rallies.append(newRally)
-                PersistenceManager.saveRallies(rallies: rallies)
-                rallyName = ""
+                
+                Button("Add Rally") {
+                    let newRally = Rally(name: rallyName, stages: [])
+                    rallies.append(newRally)
+                    PersistenceManager.saveRallies(rallies: rallies)
+                    rallyName = ""
+                }
+                .padding()
             }
-            .padding()
         }
     }
 }
