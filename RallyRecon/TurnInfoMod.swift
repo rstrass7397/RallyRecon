@@ -3,6 +3,8 @@
 import SwiftUI
 
 struct TurnInfoMod: View {
+    @State var trueModifiers: [String] = []
+    @State var isTrueValuesVisible: Bool = false
     @Binding var isTrueTurns: [String: Bool]
     var onSave: ([String]) -> Void
 
@@ -85,7 +87,7 @@ struct TurnInfoMod: View {
                 Button("6") {
                     toggleModifier(key: "6")
                 }
-                .buttonStyle(RoundedRectangleButtonStyle(isSelected: isTrueTurns["6"]!))
+//                .(isSelected: isTrueTurns["6"]!)
             }
 
             
