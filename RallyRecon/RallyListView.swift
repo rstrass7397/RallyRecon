@@ -15,7 +15,7 @@ struct RallyListView: View {
                         Text(rally.name)
                     }
                 }
-                .navigationBarItems(trailing: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies))) // Pass the Binding here
+                .navigationBarItems(trailing: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies)))
             }
         }
     }
