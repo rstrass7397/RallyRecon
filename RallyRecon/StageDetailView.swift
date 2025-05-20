@@ -26,10 +26,6 @@ struct StageDetailView: View {
             }
             .padding()
             .buttonStyle(.bordered)
-
-            Button("Save Modifications") {
-            }
-            .padding()
         }
         .sheet(isPresented: $showTurnInfo) {
             TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
