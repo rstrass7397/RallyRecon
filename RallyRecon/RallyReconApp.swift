@@ -6,7 +6,7 @@ import SwiftUI
 struct RallyReconApp: App {
     var body: some Scene {
         WindowGroup {
-            RallyListView()
+            HomeView()
         }
     }
 }
