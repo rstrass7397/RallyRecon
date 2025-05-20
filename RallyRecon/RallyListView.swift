@@ -5,18 +5,27 @@ struct RallyListView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Rallies")
-                    .font(.largeTitle)
-                    .padding()
-                
-                List(rallies, id: \.name) { rally in
-                    NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
-                        Text(rally.name)
+            ZStack {
+                Color.creme
+                    .ignoresSafeArea()
+                VStack {
+                    Text("Rallies")
+                        .font(.largeTitle)
+                        .padding()
+                        .foregroundColor(Color.navy)
+                    
+                    List(rallies, id: \.name) { rally in
+                        NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
+                            Text(rally.name)
+                                .foregroundColor(Color.navy)
+                        }
                     }
+                    .listStyle(PlainListStyle())
+                    .background(Color.creme)
+                    .navigationBarItems(trailing: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies)))
                 }
-                .navigationBarItems(trailing: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies)))
             }
         }
     }
 }
+

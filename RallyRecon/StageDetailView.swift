@@ -14,19 +14,23 @@ struct StageDetailView: View {
             Text(stage.name)
                 .font(.largeTitle)
                 .padding()
-
+                .foregroundColor(Color.navy)
+            
             ForEach(stage.trueModifiers, id: \.self) { modifier in
                 Text(modifier)
                     .font(.headline)
                     .padding(5)
+                    .foregroundColor(Color.navy)
             }
-
+            
             Button("Add Modifier") {
                 showTurnInfo.toggle()
             }
             .padding()
             .buttonStyle(.bordered)
+            .foregroundColor(Color.navy)
         }
+        .background(Color.creme)
         .sheet(isPresented: $showTurnInfo) {
             TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
                 let modifier = "\(selectedModifier[0]), \(selectedModifier[1])"
@@ -34,4 +38,7 @@ struct StageDetailView: View {
             }
         }
     }
+}
+#Preview {
+    StageDetailView(stage: .init(id: UUID(), name: "Test Stage", isTrueTurns: [:], trueModifiers: []), stages: [])      
 }
