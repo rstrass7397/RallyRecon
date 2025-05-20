@@ -8,45 +8,111 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var isMenuOpen = false
+    @State private var rallyName: String = ""
+    @State private var rallies: [Rally] = PersistenceManager.loadRallies()
+
     var body: some View {
         NavigationStack {
-            ZStack{
-                Color(red: 248 / 255, green: 248 / 255, blue: 238/255)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .ignoresSafeArea()
+            ZStack {
                 
+                Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
+                    .ignoresSafeArea()
+
+           
                 VStack(spacing: 20) {
-                    
+                    HStack {
+                        Button(action: {
+                            withAnimation {
+                                isMenuOpen.toggle()
+                            }
+                        }) {
+                            Image(systemName: "line.horizontal.3")
+                                .font(.title)
+                                .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
+                                .padding()
+                        }
+                        Spacer()
+                    }
+
+                    Spacer()
+
                     Image("AppLogo")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
-                    
-                    
+
                     Text("Welcome to RallyRecon")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                        .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
-                    
-                    NavigationLink(destination: RallyListView()) {
-                        Text("Main Menu")
-                            .font(.headline)
-                            .foregroundColor(Color(red: 245/255, green: 245/255, blue: 220/255))
-                            .padding()
-                            .frame(maxWidth: 200)
-                            .background(Color(red: 17/255, green: 51/255, blue: 95/255))
-                            .cornerRadius(12)
-                    }
+                        .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
+                        .padding()
+
+                    Spacer()
                 }
                 .padding()
+
+             
+                if isMenuOpen {
+                    SideMenu(
+                        isOpen: $isMenuOpen,
+                        rallyName: $rallyName,
+                        rallies: $rallies
+                    )
+                    .transition(.move(edge: .leading))
+                }
             }
         }
     }
 }
 
+struct SideMenu: View {
+    @Binding var isOpen: Bool
+    @Binding var rallyName: String
+    @Binding var rallies: [Rally]
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+        
+            Color.black.opacity(0.3)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    withAnimation {
+                        isOpen = false
+                    }
+                }
+
+            
+            VStack(alignment: .trailing, spacing: 20) {
+                Text("Rallies")
+                    .font(.title)
+                    .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
+                    .padding()
+                List(rallies, id: \.name) { rally in
+                    NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
+                        Text(rally.name)
+        
+                    }
+                }
+                .navigationBarItems(leading: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies)))
+                
+//                NavigationLink("Go to Rallies", destination: RallyListView())
+//                    .padding()
+//                    .background(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
+//                    .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255))
+//                    .cornerRadius(10)
+
+                Spacer()
+            }
+            .padding()
+            .frame(width: 300)
+            .background(Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255))
+            .edgesIgnoringSafeArea(.vertical)
+        }
+    }
+}
 #Preview {
     HomeView()
 }

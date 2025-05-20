@@ -39,6 +39,3 @@ struct StageDetailView: View {
         }
     }
 }
-#Preview {
-    StageDetailView(stage: .init(id: UUID(), name: "Test Stage", isTrueTurns: [:], trueModifiers: []), stages: [])      
-}
