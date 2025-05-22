@@ -10,32 +10,42 @@ struct StageDetailView: View {
     ]
     
     var body: some View {
-        VStack {
-            Text(stage.name)
-                .font(.largeTitle)
-                .padding()
-                .foregroundColor(Color.navy)
+        ZStack {
             
-            ForEach(stage.trueModifiers, id: \.self) { modifier in
-                Text(modifier)
-                    .font(.headline)
-                    .padding(5)
+            Color.creme
+                .ignoresSafeArea()
+            VStack {
+                Text(stage.name)
+                    .font(.largeTitle)
+                    .padding()
                     .foregroundColor(Color.navy)
+                
+                ForEach(stage.trueModifiers, id: \.self) { modifier in
+                    Text(modifier)
+                        .font(.title)
+                        .padding(5)
+                        .foregroundColor(Color.navy)
+                        
+                }
+                
+                Button("Add Modifier") {
+                    showTurnInfo.toggle()
+                }
+                .padding()
+                .frame(width: 200, height: 60)
+                .background(Color.navy)
+                .cornerRadius(20)
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(Color.creme)
+
             }
-            
-            Button("Add Modifier") {
-                showTurnInfo.toggle()
-            }
-            .padding()
-            .buttonStyle(.bordered)
-            .foregroundColor(Color.navy)
-        }
-        .background(Color.creme)
-        .sheet(isPresented: $showTurnInfo) {
-            TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
-                let modifier = "\(selectedModifier[0]), \(selectedModifier[1])"
-                stage.trueModifiers.append(modifier)
-            }
+            //        .background(Color.creme)
+                    .sheet(isPresented: $showTurnInfo){
+                        TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
+                            let modifier = "\(selectedModifier[0]), \(selectedModifier[1])"
+                            stage.trueModifiers.append(modifier)
+                        }
+                    }
         }
     }
 }
