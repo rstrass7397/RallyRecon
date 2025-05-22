@@ -11,12 +11,17 @@ struct StageListView: View {
                 .padding()
                 .foregroundColor(Color.navy)
             
-            List(stages.indices, id: \.self) { index in
-                NavigationLink(destination: StageDetailView(stage: $stages[index], stages: $stages)) {
-                    Text(stages[index].name)
-                        .foregroundColor(Color.navy)
-                }
-            }
+            List {
+                           ForEach(stages.indices, id: \.self) { index in
+                               NavigationLink(destination: StageDetailView(stage: $stages[index], stages: $stages)) {
+                                   Text(stages[index].name)
+                                       .foregroundColor(Color.navy)
+                               }
+                               .listRowBackground(Color.creme)
+                           }
+                       }
+                       .scrollContentBackground(.hidden) 
+                       .background(Color.creme)
             
             NavigationLink("Add Stage", destination: AddStageView(rally: rally, stages: $stages))
                 .padding()
