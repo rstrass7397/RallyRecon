@@ -4,7 +4,7 @@ struct RallyListView: View {
     @EnvironmentObject var rallyManager: RallyManager
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(rallyManager.rallies) { rally in
                     NavigationLink(destination: StageListView(rallyID: rally.id)) {
