@@ -6,6 +6,7 @@ struct AddStageView: View {
 
     let rallyID: UUID
     @State private var stageName = ""
+    @State private var showMessage = false
 
     var body: some View {
         VStack {
@@ -15,10 +16,28 @@ struct AddStageView: View {
 
             Button("Add Stage") {
                 addStage()
+                showMessage = true
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    showMessage = false
+                }
             }
-            .padding()
             .disabled(stageName.trimmingCharacters(in: .whitespaces).isEmpty)
+            .padding()
+            .frame(width: 150, height: 60)
+            .background(Color.navy)
+            .cornerRadius(20)
+            .foregroundColor(Color.creme)
+            .font(.system(size: 20, weight: .bold))
+
+            if showMessage {
+                Text("Stage Added!")
+                    .foregroundColor(.navy)
+                    .font(.headline)
+                    .padding(.top)
+            }
         }
+        .padding()
         .navigationTitle("Add Stage")
     }
 
@@ -34,6 +53,7 @@ struct AddStageView: View {
         )
 
         rallyManager.addStage(to: rallyID, stage: newStage)
-        presentationMode.wrappedValue.dismiss()
+        stageName = ""
     }
 }
+

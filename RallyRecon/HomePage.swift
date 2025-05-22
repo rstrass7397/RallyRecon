@@ -91,9 +91,13 @@ struct SideMenu: View {
                     .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
                     .padding()
                 List(rallies, id: \.name) { rally in
-                    NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
+                    NavigationLink(
+                        destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)
+                    ) {
                         Text(rally.name)
-        
+                    }
+                }
+
                     }
                 }
                 .navigationBarItems(leading: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies)))
