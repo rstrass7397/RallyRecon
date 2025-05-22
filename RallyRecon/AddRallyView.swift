@@ -1,34 +1,32 @@
 import SwiftUI
 
 struct AddRallyView: View {
-    @State var rallyName: String = ""
-    @Binding var rallies: [Rally]
-    
+    @EnvironmentObject var rallyManager: RallyManager
+    @Environment(\.presentationMode) var presentationMode
+
+    @State private var rallyName = ""
+
     var body: some View {
-        ZStack{
-            Color(red: 248 / 255, green: 248 / 255, blue: 238/255)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .ignoresSafeArea()
-            VStack {
-                
-                TextField("Enter Rally Name", text: $rallyName)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                Button("Add Rally") {
-                    let newRally = Rally(name: rallyName, stages: [])
-                    rallies.append(newRally)
-                    PersistenceManager.saveRallies(rallies: rallies)
-                    rallyName = ""
-                }
-                .padding()
-                .frame(width: 150, height: 60)
-                .background(Color(red: 17 / 255, green: 51 / 255, blue: 95/255))
-                .cornerRadius(20)
-                .font(.system(size:20, weight: .bold))
-                .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238/255))
+        VStack {
+            TextField("Rally Name", text: $rallyName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+
+            Button("Add Rally") {
+                addRally()
             }
+            .padding()
+            .disabled(rallyName.trimmingCharacters(in: .whitespaces).isEmpty)
         }
+        .navigationTitle("Add Rally")
+    }
+
+    private func addRally() {
+        let trimmed = rallyName.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else { return }
+
+        let newRally = Rally(id: UUID(), name: trimmed, stages: [])
+        rallyManager.addRally(newRally)
+        presentationMode.wrappedValue.dismiss()
     }
 }

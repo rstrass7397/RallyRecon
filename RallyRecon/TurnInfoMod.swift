@@ -1,7 +1,3 @@
-
- 
-import SwiftUI
-
 import SwiftUI
 
 struct TurnInfoMod: View {
@@ -51,52 +47,39 @@ struct TurnInfoMod: View {
                     }
                 }
 
-                HStack(spacing: 10) {
-                    ForEach(["1", "2", "3", "4", "5", "6"], id: \.self) { num in
+                VStack(spacing: 10) {
+                    ForEach(1..<7) { i in
                         Button {
-                            for i in 1...6 {
-                                isTrueTurns["\(i)"] = (num == "\(i)")
+                            for j in 1...6 {
+                                isTrueTurns["\(j)"] = false
                             }
+                            isTrueTurns["\(i)"] = true
                         } label: {
-                            Text(num)
-                                .frame(width: 100, height: 100)
+                            Text("\(i)")
+                                .frame(width: 75, height: 75)
                                 .foregroundColor(.white)
-                                .font(.system(size: 40, weight: .bold))
+                                .font(.system(size: 50, weight: .bold))
                                 .background(
-                                    RoundedRectangle(cornerRadius: 30)
-                                        .foregroundColor(isTrueTurns[num] == true ? .blue : Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
+                                    Circle()
+                                        .foregroundColor(isTrueTurns["\(i)"] == true ? .blue : Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
                                 )
                         }
                     }
                 }
+                .padding()
 
-                Button("Save and Return") {
-                    let directions = ["left", "right"]
-                    let numbers = ["1", "2", "3", "4", "5", "6"]
+                Button("Save Modifier") {
+                    let turn = isTrueTurns["left"] == true ? "Left" : (isTrueTurns["right"] == true ? "Right" : "")
+                    let numberTurn = (1...6).first(where: { isTrueTurns["\($0)"] == true })?.description ?? ""
 
-                    if let selectedDirection = directions.first(where: { isTrueTurns[$0] == true }),
-                       let selectedNumber = numbers.first(where: { isTrueTurns[$0] == true }) {
-                        onSave([selectedDirection, selectedNumber])
+                    if !turn.isEmpty && !numberTurn.isEmpty {
+                        onSave([turn, numberTurn])
+                        dismiss()
                     }
-
-                    resetSelections()
-                    dismiss()
                 }
-                .frame(width: 300, height: 80)
-                .background(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
-                .cornerRadius(20)
-                .font(.system(size: 30, weight: .bold))
-                .foregroundColor(Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255))
-                .padding(60)
+                .buttonStyle(.borderedProminent)
+                .padding()
             }
-        }
-        .navigationBarTitle("Turn Modifiers", displayMode: .inline)
-    }
-
-    private func resetSelections() {
-        for key in isTrueTurns.keys {
-            isTrueTurns[key] = false
         }
     }
 }
-

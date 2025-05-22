@@ -1,22 +1,32 @@
 import SwiftUI
 
 struct StageListView: View {
-    var rally: Rally
-    @Binding var stages: [Stage]
-    
+    @EnvironmentObject var rallyManager: RallyManager
+    let rallyID: UUID
+
+    var rallyIndex: Int? {
+        rallyManager.rallies.firstIndex(where: { $0.id == rallyID })
+    }
+
     var body: some View {
         VStack {
-            Text("Stages for \(rally.name)")
-                .font(.largeTitle)
-                .padding()
-            
-            List(stages.indices, id: \.self) { index in
-                NavigationLink(destination: StageDetailView(stage: $stages[index], stages: $stages)) {
-                    Text(stages[index].name)
+            if let rallyIndex = rallyIndex {
+                List {
+                    ForEach(rallyManager.rallies[rallyIndex].stages) { stage in
+                        NavigationLink(destination: StageDetailView(rallyID: rallyID, stageID: stage.id)) {
+                            Text(stage.name)
+                        }
+                    }
+                    .onDelete { offsets in
+                        rallyManager.deleteStage(atOffsets: offsets, rallyID: rallyID)
+                    }
                 }
+                NavigationLink("Add Stage", destination: AddStageView(rallyID: rallyID))
+                    .padding()
+            } else {
+                Text("Rally not found")
             }
-            
-            NavigationLink("Add Stage", destination: AddStageView(rally: rally, stages: $stages))
         }
+        .navigationTitle("Stages")
     }
 }

@@ -1,21 +1,21 @@
 import SwiftUI
 
 struct RallyListView: View {
-    @State var rallies: [Rally] = []
-    
+    @EnvironmentObject var rallyManager: RallyManager
+
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Rallies")
-                    .font(.largeTitle)
-                    .padding()
-                
-                List(rallies, id: \.name) { rally in
-                    NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
+            List {
+                ForEach(rallyManager.rallies) { rally in
+                    NavigationLink(destination: StageListView(rallyID: rally.id)) {
                         Text(rally.name)
                     }
                 }
-                .navigationBarItems(trailing: NavigationLink("Add Rally", destination: AddRallyView(rallies: $rallies)))
+                .onDelete(perform: rallyManager.deleteRally)
+            }
+            .navigationTitle("Rallies")
+            .toolbar {
+                NavigationLink("Add Rally", destination: AddRallyView())
             }
         }
     }
