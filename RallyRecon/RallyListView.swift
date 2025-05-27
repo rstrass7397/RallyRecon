@@ -2,13 +2,13 @@ import SwiftUI
 
 struct RallyListView: View {
     @EnvironmentObject var rallyManager: RallyManager
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.creme
                     .ignoresSafeArea()
-
+                
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Rallies")
                         .font(.system(size: 36, weight: .bold))
@@ -30,9 +30,8 @@ struct RallyListView: View {
             }
             .toolbar {
                 NavigationLink("Add Rally", destination: AddRallyView())
-                NavigationLink("Add Rally", destination: AddRallyView())
             }
         }
     }
-
+}
 

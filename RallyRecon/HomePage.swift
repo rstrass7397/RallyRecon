@@ -31,6 +31,7 @@ struct MainMenuView: View {
                             .foregroundColor(.creme)
                             .cornerRadius(15)
                             .font(.title2)
+                            .fontWeight(.bold)
                         }
                         .offset(y: -50)
                     }

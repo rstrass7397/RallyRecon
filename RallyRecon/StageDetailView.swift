@@ -49,8 +49,12 @@ struct StageDetailView: View {
                 Button("Add Modifier") {
                     showTurnInfo.toggle()
                 }
+                .font(.largeTitle)
+                .foregroundColor(.creme)
+                .frame(width: 240, height: 60)
+                .cornerRadius(20)
+                .background(Color.navy)
                 .padding()
-                .buttonStyle(.bordered)
                 .sheet(isPresented: $showTurnInfo) {
                     TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
                         let modifierString = "\(selectedModifier[0]), \(selectedModifier[1])"
