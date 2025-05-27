@@ -47,7 +47,7 @@ struct TurnInfoMod: View {
                     }
                 }
 
-                VStack(spacing: 10) {
+                HStack(spacing: 10) {
                     ForEach(1..<7) { i in
                         Button {
                             for j in 1...6 {
