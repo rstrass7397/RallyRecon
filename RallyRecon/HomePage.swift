@@ -37,18 +37,7 @@ struct HomeView: View {
 
                     Spacer()
 
-                    Image("AppLogo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-
-                    Text("Welcome to RallyRecon")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Color(red: 17 / 255, green: 51 / 255, blue: 95 / 255))
-                        .padding()
+                   
 
                     Spacer()
                 }
@@ -109,14 +98,3 @@ struct SideMenu: View {
 //                    .cornerRadius(10)
 
                 Spacer()
-            }
-            .padding()
-            .frame(width: 300)
-            .background(Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255))
-            .edgesIgnoringSafeArea(.vertical)
-        }
-    }
-}
-#Preview {
-    HomeView()
-}
