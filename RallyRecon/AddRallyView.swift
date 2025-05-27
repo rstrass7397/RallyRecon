@@ -5,48 +5,54 @@ struct AddRallyView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showMessage = false
     @State private var rallyName = ""
-
+    
     var body: some View {
-        VStack {
-            TextField("Rally Name", text: $rallyName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+        ZStack{
+            Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
+                .ignoresSafeArea()
+            VStack {
+                TextField("Rally Name", text: $rallyName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                Button("Add Rally") {
+                    addRally()
+                    showMessage = true
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        showMessage = false
+                    }
+                }
+                .disabled(rallyName.trimmingCharacters(in: .whitespaces).isEmpty)
                 .padding()
-            
-            Button("Add Rally") {
-                addRally()
-                showMessage = true
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    showMessage = false
+                .frame(width: 150, height: 60)
+                .background(Color.navy)
+                .cornerRadius(20)
+                .foregroundColor(Color.creme)
+                .font(.system(size: 20, weight: .bold))
+                
+                if showMessage {
+                    Text("Rally Added!")
+                        .foregroundColor(.navy)
+                        .font(.headline)
+                        .padding(.top)
                 }
             }
-            .disabled(rallyName.trimmingCharacters(in: .whitespaces).isEmpty)
             .padding()
-            .frame(width: 150, height: 60)
-            .background(Color.navy)
-            .cornerRadius(20)
-            .foregroundColor(Color.creme)
-            .font(.system(size: 20, weight: .bold))
-
-            if showMessage {
-                Text("Rally Added!")
-                    .foregroundColor(.navy)
-                    .font(.headline)
-                    .padding(.top)
-            }
+            .navigationTitle("Add Rally")
         }
-        .padding()
-        .navigationTitle("Add Rally")
     }
-
-    private func addRally() {
-        let trimmed = rallyName.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return }
-
-        let newRally = Rally(id: UUID(), name: trimmed, stages: [])
-        rallyManager.addRally(newRally)
-        rallyName = ""
+        private func addRally() {
+            let trimmed = rallyName.trimmingCharacters(in: .whitespaces)
+            guard !trimmed.isEmpty else { return }
+            
+            let newRally = Rally(id: UUID(), name: trimmed, stages: [])
+            rallyManager.addRally(newRally)
+            rallyName = ""
+        }
     }
+#Preview{
+    AddRallyView()
 }
 #Preview {
    AddRallyView()
