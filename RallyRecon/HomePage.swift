@@ -2,17 +2,34 @@ import SwiftUI
 
 struct MainMenuView: View {
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 20) {
-                Text("Main Menu")
+            NavigationStack {
+                ZStack {
+                    Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
+                        .ignoresSafeArea()
+                VStack(spacing: 20) {
+                    Image("AppLogo")
+                        .resizable()
+                        .frame(width: 300, height: 300)
+                    Text("Main Menu")
+                        .font(.largeTitle)
+                        .foregroundColor(.navy)
+                        .fontWeight(.bold)
+                    
+                    NavigationLink("Enter Rallies") {
+                        RallyListView()
+                    }
+                    .fontWeight(.bold)
                     .font(.largeTitle)
-
-                NavigationLink("Enter Rallies") {
-                    RallyListView()
+                    .foregroundColor(.creme)
+                    .frame(width: 250, height: 60)
+                    .background(Color.navy)
+                    .cornerRadius(20)
                 }
-                .buttonStyle(.borderedProminent)
+                .navigationTitle("Welcome")
             }
-            .navigationTitle("Welcome")
         }
     }
+}
+#Preview{
+    MainMenuView()
 }
