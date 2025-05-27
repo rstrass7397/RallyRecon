@@ -48,3 +48,6 @@ struct AddRallyView: View {
         rallyName = ""
     }
 }
+#Preview {
+   AddRallyView()
+}

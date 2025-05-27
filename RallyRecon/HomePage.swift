@@ -7,34 +7,38 @@ struct MainMenuView: View {
                 Color.creme
                     .ignoresSafeArea()
 
-                VStack(spacing: 30) {
+                VStack {
                     Spacer()
 
-                    Image("AppLogo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 400, height: 400)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    VStack(spacing: 30) {
+                        Image("AppLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 400, height: 400)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
 
-                    Text("RallyRecon")
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundColor(.navy)
+                        VStack(spacing: 30) {
+                            Text("RallyRecon")
+                                .font(.system(size: 48, weight: .bold))
+                                .foregroundColor(.navy)
 
-                    NavigationLink("Enter Rallies") {
-                        RallyListView()
+                            NavigationLink("Enter Rallies") {
+                                RallyListView()
+                            }
+                            .padding()
+                            .frame(width: 240, height: 60)
+                            .background(Color.navy)
+                            .foregroundColor(.creme)
+                            .cornerRadius(15)
+                            .font(.title2)
+                        }
+                        .offset(y: -50)
                     }
-                    .padding()
-                    .frame(width: 240, height: 60)
-                    .background(Color.navy)
-                    .foregroundColor(.creme)
-                    .cornerRadius(15)
-                    .font(.title2)
 
                     Spacer()
                 }
                 .padding()
             }
-            .navigationTitle("Welcome")
         }
     }
 }
