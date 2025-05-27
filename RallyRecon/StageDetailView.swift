@@ -16,14 +16,6 @@ struct StageDetailView: View {
         }
         return nil
     }
-
-    @State private var showTurnInfo = false
-    @State private var isTrueTurns: [String: Bool] = [
-        "left": false, "right": false,
-        "1": false, "2": false, "3": false,
-        "4": false, "5": false, "6": false
-    ]
-
     var body: some View {
         VStack {
             if let rallyIndex = rallyIndex, let stageIndex = stageIndex {
@@ -40,27 +32,14 @@ struct StageDetailView: View {
                     }
                 }
 
-                Button("Add Modifier") {
-                    showTurnInfo.toggle()
-                }
-                .padding()
-                .buttonStyle(.bordered)
-                .sheet(isPresented: $showTurnInfo) {
-                    TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
-                        let modifierString = "\(selectedModifier[0]), \(selectedModifier[1])"
-                        rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-                        resetSelections()
-                    }
-                }
+                NavigationLink(
+                    "Add Modifiers",
+                    destination: ModHub(rallyID: rallyID, stageID: stageID)
+                )
+
             } else {
                 Text("Stage not found")
             }
-        }
-    }
-
-    private func resetSelections() {
-        for key in isTrueTurns.keys {
-            isTrueTurns[key] = false
         }
     }
 }

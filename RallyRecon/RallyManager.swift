@@ -4,15 +4,13 @@ import Combine
 class RallyManager: ObservableObject {
     @Published var rallies: [Rally] = PersistenceManager.loadRallies()
 
-    static let shared = RallyManager() // singleton if you want
+    static let shared = RallyManager()
 
     private init() {}
 
     func save() {
         PersistenceManager.saveRallies(rallies)
     }
-
-    // Rallies
 
     func addRally(_ rally: Rally) {
         rallies.append(rally)
@@ -24,7 +22,6 @@ class RallyManager: ObservableObject {
         save()
     }
 
-    // Stages
 
     func addStage(to rallyID: UUID, stage: Stage) {
         guard let index = rallies.firstIndex(where: { $0.id == rallyID }) else { return }
@@ -38,7 +35,6 @@ class RallyManager: ObservableObject {
         save()
     }
 
-    // Modifiers
 
     func addModifier(to rallyID: UUID, stageID: UUID, modifier: String) {
         guard let rallyIndex = rallies.firstIndex(where: { $0.id == rallyID }),
