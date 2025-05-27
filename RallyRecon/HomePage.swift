@@ -41,11 +41,11 @@ struct MainMenuView: View {
 //    var body: some View {
 //        NavigationStack {
 //            ZStack {
-//                
+//
 //                Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
 //                    .ignoresSafeArea()
 //
-//           
+//
 //                VStack(spacing: 20) {
 //                    HStack {
 //                        Button(action: {
@@ -80,7 +80,7 @@ struct MainMenuView: View {
 //                }
 //                .padding()
 //
-//             
+//
 //                if isMenuOpen {
 //                    SideMenu(
 //                        isOpen: $isMenuOpen,
@@ -101,7 +101,7 @@ struct MainMenuView: View {
 //
 //    var body: some View {
 //        ZStack(alignment: .leading) {
-//        
+//
 //            Color.black.opacity(0.3)
 //                .ignoresSafeArea()
 //                .onTapGesture {
@@ -110,7 +110,7 @@ struct MainMenuView: View {
 //                    }
 //                }
 //
-//            
+//
 //            VStack(alignment: .trailing, spacing: 20) {
 //                Text("Rallies")
 //                    .font(.title)
@@ -119,7 +119,7 @@ struct MainMenuView: View {
 //                List(rallies, id: \.name) { rally in
 //                    NavigationLink(destination: StageListView(rally: rally, stages: $rallies.first(where: { $0.id == rally.id })!.stages)) {
 //                        Text(rally.name)
-//        
+//
 //                    }
 //                }
 //                .navigationBarItems(leading: NavigationLink("Add Rally", destination: AddRallyView()))
