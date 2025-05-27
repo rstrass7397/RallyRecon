@@ -30,7 +30,6 @@ struct RallyListView: View {
             }
             .toolbar {
                 NavigationLink("Add Rally", destination: AddRallyView())
-                NavigationLink("Add Rally", destination: AddRallyView())
             }
         }
     }
