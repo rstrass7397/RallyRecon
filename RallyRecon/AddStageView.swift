@@ -3,7 +3,6 @@ import SwiftUI
 struct AddStageView: View {
     @EnvironmentObject var rallyManager: RallyManager
     @Environment(\.presentationMode) var presentationMode
-
     let rallyID: UUID
     @State private var stageName = ""
     @State private var showMessage = false

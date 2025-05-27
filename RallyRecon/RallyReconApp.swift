@@ -6,8 +6,10 @@ struct RallyReconApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RallyListView()
-                .environmentObject(rallyManager)
+            NavigationStack {
+                MainMenuView()
+            }
+            .environmentObject(rallyManager)
         }
     }
 }
