@@ -6,11 +6,11 @@ struct MainMenuView: View {
                 ZStack {
                     Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
                         .ignoresSafeArea()
-                VStack(spacing: 20) {
+                    VStack(spacing: 20) {
                     Image("AppLogo")
                         .resizable()
                         .frame(width: 300, height: 300)
-                    Text("Main Menu")
+                    Text("Rally Recon")
                         .font(.largeTitle)
                         .foregroundColor(.navy)
                         .fontWeight(.bold)
