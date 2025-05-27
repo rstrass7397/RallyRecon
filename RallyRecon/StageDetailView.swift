@@ -17,18 +17,37 @@ struct StageDetailView: View {
         return nil
     }
     var body: some View {
+        ZStack{
+            Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
+                .ignoresSafeArea()
         VStack {
             if let rallyIndex = rallyIndex, let stageIndex = stageIndex {
                 Text(rallyManager.rallies[rallyIndex].stages[stageIndex].name)
                     .font(.largeTitle)
                     .padding()
-
+                
                 List {
                     ForEach(rallyManager.rallies[rallyIndex].stages[stageIndex].trueModifiers, id: \.self) { modifier in
                         Text(modifier)
+                            .foregroundColor(.navy)
                     }
                     .onDelete { offsets in
                         rallyManager.deleteModifier(atOffsets: offsets, rallyID: rallyID, stageID: stageID)
+                    }
+                }
+                .scrollContentBackground(.hidden)
+                .background(Color.creme)
+                
+                Button("Add Modifier") {
+                    showTurnInfo.toggle()
+                }
+                .padding()
+                .buttonStyle(.bordered)
+                .sheet(isPresented: $showTurnInfo) {
+                    TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
+                        let modifierString = "\(selectedModifier[0])"
+                        rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                        resetSelections()
                     }
                 }
 
