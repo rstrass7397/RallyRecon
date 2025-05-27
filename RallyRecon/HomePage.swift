@@ -2,34 +2,49 @@ import SwiftUI
 
 struct MainMenuView: View {
     var body: some View {
-            NavigationStack {
-                ZStack {
-                    Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
-                        .ignoresSafeArea()
-                    VStack(spacing: 20) {
-                    Image("AppLogo")
-                        .resizable()
-                        .frame(width: 300, height: 300)
-                    Text("Rally Recon")
-                        .font(.largeTitle)
-                        .foregroundColor(.navy)
-                        .fontWeight(.bold)
-                    
-                    NavigationLink("Enter Rallies") {
-                        RallyListView()
+        NavigationStack {
+            ZStack {
+                Color.creme
+                    .ignoresSafeArea()
+
+                VStack {
+                    Spacer()
+
+                    VStack(spacing: 30) {
+                        Image("AppLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 400, height: 400)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+
+                        VStack(spacing: 30) {
+                            Text("RallyRecon")
+                                .font(.system(size: 48, weight: .bold))
+                                .foregroundColor(.navy)
+
+                            NavigationLink("Enter Rallies") {
+                                RallyListView()
+                            }
+                            .padding()
+                            .frame(width: 240, height: 60)
+                            .background(Color.navy)
+                            .foregroundColor(.creme)
+                            .cornerRadius(15)
+                            .font(.title2)
+                        }
+                        .offset(y: -50)
                     }
-                    .fontWeight(.bold)
-                    .font(.largeTitle)
-                    .foregroundColor(.creme)
-                    .frame(width: 250, height: 60)
-                    .background(Color.navy)
-                    .cornerRadius(20)
+
+                    Spacer()
                 }
-                .navigationTitle("Welcome")
+                .padding()
             }
         }
     }
 }
-#Preview{
+
+#Preview {
     MainMenuView()
+        .environmentObject(RallyManager.shared)
 }
+

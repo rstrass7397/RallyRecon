@@ -3,8 +3,7 @@ import Combine
 
 class RallyManager: ObservableObject {
     @Published var rallies: [Rally] = PersistenceManager.loadRallies()
-
-    static let shared = RallyManager() // singleton if you want
+    static let shared = RallyManager()
 
     private init() {}
 

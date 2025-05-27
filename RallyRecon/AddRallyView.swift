@@ -54,3 +54,6 @@ struct AddRallyView: View {
 #Preview{
     AddRallyView()
 }
+#Preview {
+   AddRallyView()
+}
