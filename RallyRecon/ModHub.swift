@@ -132,20 +132,26 @@ struct ModHub: View {
             .cornerRadius(15)
             .font(.title2)
             .fontWeight(.bold)
-            
-            .frame(width: 240, height: 60)
-            .background(Color.navy)
-            .foregroundColor(.creme)
-            .cornerRadius(15)
-            .font(.title2)
-            .fontWeight(.bold)
             .sheet(isPresented: $showDurationsInfo) {
                 DurationsInfoMod(isTrueDurations: $isTrueDurations) { selectedModifier in
                     let modifierString = "\(selectedModifier[0])"
                     rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
                 }
             }
-            }
-        }
+                Button("Custom Modifier") {
+                    showCustomInfo.toggle()
+                }
+                .padding()
+                .frame(width: 240, height: 60)
+                .background(Color.navy)
+                .foregroundColor(.creme)
+                .cornerRadius(15)
+                .font(.title2)
+                .fontWeight(.bold)
+                .sheet(isPresented: $showCustomInfo) {
+                    CustomInfoMod(customText: $customText) { text in
+                        rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: text)
+                    }
+                }
     }
 }
