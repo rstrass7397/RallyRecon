@@ -9,10 +9,15 @@ struct StageListView: View {
     }
     
     var body: some View {
-        VStack {
-            ZStack{
-                Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
-                    .ignoresSafeArea()
+        ZStack {
+            Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
+                .ignoresSafeArea()
+            VStack{
+               Text("Stages")
+                    .font(.system(size: 36, weight: .bold))
+                    .foregroundColor(.navy)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 20)
                 if let rallyIndex = rallyIndex {
                     List {
                         ForEach(rallyManager.rallies[rallyIndex].stages) { stage in
@@ -34,7 +39,6 @@ struct StageListView: View {
                     Text("Rally not found")
                 }
             }
-            .navigationTitle("Stages")
             .toolbar{
                 NavigationLink("Add Stage", destination: AddStageView(rallyID: rallyID))
             }
