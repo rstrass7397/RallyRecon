@@ -107,14 +107,3 @@ struct ModHub: View {
         }
         }
     }
-        .padding()
-        .buttonStyle(.bordered)
-        .sheet(isPresented: $showDurationsInfo) {
-                DurationsInfoMod(isTrueDurations: $isTrueDurations) { selectedModifier in
-                let modifierString = "\(selectedModifier[0])"
-                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-            }
-        }
-            
-        }
-    }
