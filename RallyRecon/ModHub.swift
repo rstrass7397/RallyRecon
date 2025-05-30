@@ -37,7 +37,7 @@ struct ModHub: View {
     @State private var showDurationsInfo = false
     @State private var isTrueDurations: [String: Bool] = [
         "Short": false, "Long": false, "Very Long": false, "Extra Long": false, "Extremely Long": false, "Late": false, "Tightens": false, "Open": false, "Opens and Tightens": false
-]
+    ]
     @State private var showBumpsInfo = false
     @State private var isTrueBumps: [String: Bool] = [
         "Jump": false, "Big Jump": false, "Bump": false, "Dip": false
@@ -46,7 +46,8 @@ struct ModHub: View {
     @State private var isTrueCrests: [String: Bool] = [
         "Small Crest": false, "Crest": false, "Big Crest": false, "On Crest": false, "Long Crest": false
     ]
-    
+    @State private var showCustomInfo = false
+    @State private var customText: String = ""
     var body: some View {
         Button("Add Turn") {
             showTurnInfo.toggle()
@@ -60,7 +61,7 @@ struct ModHub: View {
             }
         }
         
-    
+        
         Button("Add Straight") {
             showStraightsInfo.toggle()
         }
@@ -72,38 +73,48 @@ struct ModHub: View {
                 rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
             }
         }
-            Button("Add Crest") {
-                showCrestsInfo.toggle()
+        Button("Add Crest") {
+            showCrestsInfo.toggle()
+        }
+        .padding()
+        .buttonStyle(.bordered)
+        .sheet(isPresented: $showCrestsInfo) {
+            CrestsInfoMod(isTrueCrests: $isTrueCrests) { selectedModifier in
+                let modifierString = "\(selectedModifier[0])"
+                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
             }
-            .padding()
-            .buttonStyle(.bordered)
-            .sheet(isPresented: $showCrestsInfo) {
-                CrestsInfoMod(isTrueCrests: $isTrueCrests) { selectedModifier in
-                    let modifierString = "\(selectedModifier[0])"
-                    rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-                }
+        }
+        Button("Add Bump") {
+            showBumpsInfo.toggle()
+        }
+        .padding()
+        .buttonStyle(.bordered)
+        .sheet(isPresented: $showBumpsInfo) {
+            BumpInfoMod(isTrueBumps: $isTrueBumps) { selectedModifier in
+                let modifierString = "\(selectedModifier[0])"
+                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
             }
-            Button("Add Bump") {
-                showBumpsInfo.toggle()
-            }
-            .padding()
-            .buttonStyle(.bordered)
-            .sheet(isPresented: $showBumpsInfo) {
-                BumpInfoMod(isTrueBumps: $isTrueBumps) { selectedModifier in
-                    let modifierString = "\(selectedModifier[0])"
-                    rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-                }
-            }
+        }
         Button("Add Duration") {
             showDurationsInfo.toggle()
         }
         .padding()
         .buttonStyle(.bordered)
         .sheet(isPresented: $showDurationsInfo) {
-                DurationsInfoMod(isTrueDurations: $isTrueDurations) { selectedModifier in
+            DurationsInfoMod(isTrueDurations: $isTrueDurations) { selectedModifier in
                 let modifierString = "\(selectedModifier[0])"
                 rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
             }
         }
+        Button("Custom Modifier") {
+            showCustomInfo.toggle()
+        }
+        .padding()
+        .buttonStyle(.bordered)
+        .sheet(isPresented: $showCustomInfo) {
+            CustomInfoMod(customText: $customText) { text in
+                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: text)
+            }
         }
     }
+}
