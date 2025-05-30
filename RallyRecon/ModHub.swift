@@ -34,6 +34,10 @@ struct ModHub: View {
     @State private var isTrueStraights: [String: Bool] = [
         "50": false, "100": false, "150": false, "200": false
     ]
+    @State private var showBumpsInfo = false
+    @State private var isTrueBumps: [String: Bool] = [
+        "Jump": false, "Big Jump": false, "Bump": false, "Dip": false
+    ]
     @State private var showCrestsInfo = false
     @State private var isTrueCrests: [String: Bool] = [
         "Small Crest": false, "Crest": false, "Big Crest": false, "On Crest": false, "Long Crest": false
@@ -64,14 +68,23 @@ struct ModHub: View {
                 rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
                 resetSelections()
             }
-        }
         Button("Add Crest") {
             showCrestsInfo.toggle()
-        }
         .padding()
         .buttonStyle(.bordered)
         .sheet(isPresented: $showCrestsInfo) {
             CrestsInfoMod(isTrueCrests: $isTrueCrests) { selectedModifier in
+                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                resetSelections()
+            }
+        }
+        Button("Add Bump") {
+            showBumpsInfo.toggle()
+        }
+        .padding()
+        .buttonStyle(.bordered)
+        .sheet(isPresented: $showBumpsInfo) {
+            BumpInfoMod(isTrueBumps: $isTrueBumps) { selectedModifier in
                 let modifierString = "\(selectedModifier[0])"
                 rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
                 resetSelections()
