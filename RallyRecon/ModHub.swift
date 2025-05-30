@@ -37,7 +37,7 @@ struct ModHub: View {
     @State private var showDurationsInfo = false
     @State private var isTrueDurations: [String: Bool] = [
         "Short": false, "Long": false, "Very Long": false, "Extra Long": false, "Extremely Long": false, "Late": false, "Tightens": false, "Open": false, "Opens and Tightens": false
-]
+    ]
     @State private var showBumpsInfo = false
     @State private var isTrueBumps: [String: Bool] = [
         "Jump": false, "Big Jump": false, "Bump": false, "Dip": false
@@ -48,35 +48,58 @@ struct ModHub: View {
     ]
     
     var body: some View {
-        Button("Add Turn") {
-            showTurnInfo.toggle()
-        }
-        .padding()
-        .buttonStyle(.bordered)
-        .sheet(isPresented: $showTurnInfo) {
-            TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
-                let modifierString = "\(selectedModifier[0]), \(selectedModifier[1])"
-                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+        ZStack{
+            Color(red: 248 / 255, green: 248 / 255, blue: 238 / 255)
+                .ignoresSafeArea()
+            VStack{
+                Text("Modifiers")
+                    .foregroundColor(.navy)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+            Button("Add Turn") {
+                showTurnInfo.toggle()
             }
-        }
-        
-    
-        Button("Add Straight") {
-            showStraightsInfo.toggle()
-        }
-        .padding()
-        .buttonStyle(.bordered)
-        .sheet(isPresented: $showStraightsInfo) {
-            StraightsInfoMod(isTrueStraights: $isTrueStraights) { selectedModifier in
-                let modifierString = "\(selectedModifier[0])"
-                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+            .padding()
+            .frame(width: 240, height: 60)
+            .background(Color.navy)
+            .foregroundColor(.creme)
+            .cornerRadius(15)
+            .font(.title2)
+            .fontWeight(.bold)
+            .sheet(isPresented: $showTurnInfo) {
+                TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
+                    let modifierString = "\(selectedModifier[0]), \(selectedModifier[1])"
+                    rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                }
             }
-        }
+            
+            
+            Button("Add Straight") {
+                showStraightsInfo.toggle()
+            }
+            .padding()
+            .frame(width: 240, height: 60)
+            .background(Color.navy)
+            .foregroundColor(.creme)
+            .cornerRadius(15)
+            .font(.title2)
+            .fontWeight(.bold)
+            .sheet(isPresented: $showStraightsInfo) {
+                StraightsInfoMod(isTrueStraights: $isTrueStraights) { selectedModifier in
+                    let modifierString = "\(selectedModifier[0])"
+                    rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                }
+            }
             Button("Add Crest") {
                 showCrestsInfo.toggle()
             }
             .padding()
-            .buttonStyle(.bordered)
+            .frame(width: 240, height: 60)
+            .background(Color.navy)
+            .foregroundColor(.creme)
+            .cornerRadius(15)
+            .font(.title2)
+            .fontWeight(.bold)
             .sheet(isPresented: $showCrestsInfo) {
                 CrestsInfoMod(isTrueCrests: $isTrueCrests) { selectedModifier in
                     let modifierString = "\(selectedModifier[0])"
@@ -87,23 +110,42 @@ struct ModHub: View {
                 showBumpsInfo.toggle()
             }
             .padding()
-            .buttonStyle(.bordered)
+            .frame(width: 240, height: 60)
+            .background(Color.navy)
+            .foregroundColor(.creme)
+            .cornerRadius(15)
+            .font(.title2)
+            .fontWeight(.bold)
             .sheet(isPresented: $showBumpsInfo) {
                 BumpInfoMod(isTrueBumps: $isTrueBumps) { selectedModifier in
                     let modifierString = "\(selectedModifier[0])"
                     rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
                 }
             }
-        Button("Add Duration") {
-            showDurationsInfo.toggle()
-        }
-        .padding()
-        .buttonStyle(.bordered)
-        .sheet(isPresented: $showDurationsInfo) {
+            Button("Add Duration") {
+                showDurationsInfo.toggle()
+            }
+            .padding()
+            .frame(width: 240, height: 60)
+            .background(Color.navy)
+            .foregroundColor(.creme)
+            .cornerRadius(15)
+            .font(.title2)
+            .fontWeight(.bold)
+            
+            .frame(width: 240, height: 60)
+            .background(Color.navy)
+            .foregroundColor(.creme)
+            .cornerRadius(15)
+            .font(.title2)
+            .fontWeight(.bold)
+            .sheet(isPresented: $showDurationsInfo) {
                 DurationsInfoMod(isTrueDurations: $isTrueDurations) { selectedModifier in
-                let modifierString = "\(selectedModifier[0])"
-                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                    let modifierString = "\(selectedModifier[0])"
+                    rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                }
+            }
             }
         }
-        }
     }
+}

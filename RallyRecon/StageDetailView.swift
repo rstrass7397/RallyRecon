@@ -27,8 +27,6 @@ struct StageDetailView: View {
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(.navy)
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 20)
-                    
                     List {
                         ForEach(rallyManager.rallies[rallyIndex].stages[stageIndex].trueModifiers, id: \.self) { modifier in
                             Text(modifier)
