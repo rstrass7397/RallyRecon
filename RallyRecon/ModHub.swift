@@ -34,6 +34,10 @@ struct ModHub: View {
     @State private var isTrueStraights: [String: Bool] = [
         "50": false, "100": false, "150": false, "200": false
     ]
+    @State private var showDurationsInfo = false
+    @State private var isTrueDurations: [String: Bool] = [
+        "Short": false, "Long": false, "Very Long": false, "Extra Long": false, "Extremely Long": false, "Late": false, "Tightens": false, "Open": false, "Opens and Tightens": false
+    ]
     var body: some View {
         Button("Add Turn") {
             showTurnInfo.toggle()
@@ -47,6 +51,7 @@ struct ModHub: View {
                 resetSelections()
             }
         }
+        
     
         Button("Add Straight") {
             showStraightsInfo.toggle()
@@ -61,6 +66,18 @@ struct ModHub: View {
             }
         }
         
+        Button("Add Duration") {
+            showDurationsInfo.toggle()
+        }
+        .padding()
+        .buttonStyle(.bordered)
+        .sheet(isPresented: $showDurationsInfo) {
+                DurationsInfoMod(isTrueDurations: $isTrueDurations) { selectedModifier in
+                let modifierString = "\(selectedModifier[0])"
+                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                resetSelections()
+            }
+        }
     }
     
     
