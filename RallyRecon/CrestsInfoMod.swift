@@ -116,7 +116,7 @@ struct CrestsInfoMod: View {
                                 isTrueCrests["Crest"] == true ? "Crest" :
                                 isTrueCrests["Big Crest"] == true ? "Big Crest" :
                                 isTrueCrests["On Crest"] == true ? "On Crest" :
-                                isTrueCrests["On Crest"] == true ? "Long Crest" : ""
+                                isTrueCrests["Long Crest"] == true ? "Long Crest" : ""
                         )
                         
                         if !straight.isEmpty{

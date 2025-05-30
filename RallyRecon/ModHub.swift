@@ -53,10 +53,9 @@ struct ModHub: View {
             TurnInfoMod(isTrueTurns: $isTrueTurns) { selectedModifier in
                 let modifierString = "\(selectedModifier[0]), \(selectedModifier[1])"
                 rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-                resetSelections()
             }
         }
-    
+        
         Button("Add Straight") {
             showStraightsInfo.toggle()
         }
@@ -66,37 +65,30 @@ struct ModHub: View {
             StraightsInfoMod(isTrueStraights: $isTrueStraights) { selectedModifier in
                 let modifierString = "\(selectedModifier[0])"
                 rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-                resetSelections()
-            }
-        Button("Add Crest") {
-            showCrestsInfo.toggle()
-        .padding()
-        .buttonStyle(.bordered)
-        .sheet(isPresented: $showCrestsInfo) {
-            CrestsInfoMod(isTrueCrests: $isTrueCrests) { selectedModifier in
-                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-                resetSelections()
             }
         }
-        Button("Add Bump") {
-            showBumpsInfo.toggle()
-        }
-        .padding()
-        .buttonStyle(.bordered)
-        .sheet(isPresented: $showBumpsInfo) {
-            BumpInfoMod(isTrueBumps: $isTrueBumps) { selectedModifier in
-                let modifierString = "\(selectedModifier[0])"
-                rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
-                resetSelections()
+            Button("Add Crest") {
+                showCrestsInfo.toggle()
             }
-        }
-        
-    }
-    
-    
-    private func resetSelections() {
-        for key in isTrueTurns.keys {
-            isTrueTurns[key] = false
+            .padding()
+            .buttonStyle(.bordered)
+            .sheet(isPresented: $showCrestsInfo) {
+                CrestsInfoMod(isTrueCrests: $isTrueCrests) { selectedModifier in
+                    let modifierString = "\(selectedModifier[0])"
+                    rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                }
+            }
+            Button("Add Bump") {
+                showBumpsInfo.toggle()
+            }
+            .padding()
+            .buttonStyle(.bordered)
+            .sheet(isPresented: $showBumpsInfo) {
+                BumpInfoMod(isTrueBumps: $isTrueBumps) { selectedModifier in
+                    let modifierString = "\(selectedModifier[0])"
+                    rallyManager.addModifier(to: rallyID, stageID: stageID, modifier: modifierString)
+                }
+            }
+            
         }
     }
-}
