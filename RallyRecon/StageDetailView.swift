@@ -24,13 +24,14 @@ struct StageDetailView: View {
                 if let rallyIndex = rallyIndex, let stageIndex = stageIndex {
                     Text(rallyManager.rallies[rallyIndex].stages[stageIndex].name)
                         .font(.largeTitle)
-                        .font(.system(size: 36, weight: .bold))
+                        .font(.system(size: 46, weight: .bold))
                         .foregroundColor(.navy)
                         .frame(maxWidth: .infinity, alignment: .center)
                     List {
                         ForEach(rallyManager.rallies[rallyIndex].stages[stageIndex].trueModifiers, id: \.self) { modifier in
                             Text(modifier)
-                                .font(.title)
+                                .font(.largeTitle)
+                                .foregroundColor(.navy)
                         }
                         .onDelete { offsets in
                             rallyManager.deleteModifier(atOffsets: offsets, rallyID: rallyID, stageID: stageID)
@@ -48,7 +49,7 @@ struct StageDetailView: View {
                     .background(Color.navy)
                     .foregroundColor(.creme)
                     .cornerRadius(15)
-                    .font(.title2)
+                    .font(.largeTitle)
                     .fontWeight(.bold)
                     
                 } else {

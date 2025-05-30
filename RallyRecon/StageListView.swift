@@ -14,7 +14,7 @@ struct StageListView: View {
                 .ignoresSafeArea()
             VStack{
                Text("Stages")
-                    .font(.system(size: 36, weight: .bold))
+                    .font(.system(size: 46, weight: .bold))
                     .foregroundColor(.navy)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 20)
@@ -23,6 +23,7 @@ struct StageListView: View {
                         ForEach(rallyManager.rallies[rallyIndex].stages) { stage in
                             NavigationLink(destination: StageDetailView(rallyID: rallyID, stageID: stage.id)) {
                                 Text(stage.name)
+                                    .font(.largeTitle)
                                     .foregroundColor(.navy)
                             }
                         }
@@ -41,6 +42,7 @@ struct StageListView: View {
             }
             .toolbar{
                 NavigationLink("Add Stage", destination: AddStageView(rallyID: rallyID))
+                    .font(.system(size: 30))
             }
         }
     }
